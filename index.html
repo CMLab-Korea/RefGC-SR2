@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RefGC-SR² — Reference-guided Super-Resolution and Refinement of AI Generated Content</title>
+<meta name="description" content="RefGC-SR²: a new post-processing task that reuses the high-resolution reference image to jointly super-resolve and refine AI-generated content. NeurIPS 2026." />
+<meta name="keywords" content="RefGC-SR2, reference-guided super-resolution, generative refinement, diffusion transformer, FLUX, NeurIPS 2026" />
+
+<meta property="og:title" content="RefGC-SR²: Reference-guided Super-Resolution and Refinement of AI Generated Content" />
+<meta property="og:description" content="The first task that jointly performs SR and refinement on AI-generated content using high-resolution reference images." />
+<meta property="og:image" content="static/images/teaser.png" />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'$',right:'$',display:false}
+  ]});"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+<link rel="stylesheet" href="static/css/style.css" />
+</head>
+
+<body>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+
+      <!-- <div class="venue-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">NeurIPS 2026</span>
+      </div> -->
+
+      <h1 class="title-main">
+        <span class="title-prefix">RefGC-SR</span><span class="title-superscript">2</span>
+      </h1>
+
+      <p class="subtitle-anim">
+        <span class="word w1">Reference-guided</span>
+        <span class="word w2">Super-Resolution</span>
+        <span class="word w3">and</span>
+        <span class="word w4">Refinement</span>
+        <span class="word w5">of</span>
+        <span class="word w6">AI&nbsp;Generated&nbsp;Content</span>
+      </p>
+
+      <div class="authors">
+        <span class="cofirst-marquee" aria-label="Co-first authors: Jeahun Sung, Dahyeon Kye">
+          <span class="cofirst-track">
+            <!-- Set 1 -->
+            <span class="cofirst-name">Jeahun Sung</span>
+            <span class="cofirst-sep">·</span>
+            <span class="cofirst-name">Dahyeon Kye</span>
+            <span class="cofirst-sep">·</span>
+            <span class="cofirst-name">Jeahun Sung</span>
+            <span class="cofirst-sep">·</span>
+            <span class="cofirst-name">Dahyeon Kye</span>
+            <span class="cofirst-sep">·</span>
+            <!-- Set 2: identical duplicate for seamless loop -->
+            <span class="cofirst-name">Jeahun Sung</span>
+            <span class="cofirst-sep">·</span>
+            <span class="cofirst-name">Dahyeon Kye</span>
+            <span class="cofirst-sep">·</span>
+            <span class="cofirst-name">Jeahun Sung</span>
+            <span class="cofirst-sep">·</span>
+            <span class="cofirst-name">Dahyeon Kye</span>
+            <span class="cofirst-sep">·</span>
+          </span>
+        </span><sup class="cofirst-mark">*,1</sup>,
+        <span class="author-name">Soo Ye Kim<sup>2</sup></span>,
+        <span class="author-name">Jihyong Oh<sup>1</sup></span>
+      </div>
+      <div class="affiliations">
+        <span class="affil">
+          <sup>1</sup>CMLab, Chung-Ang University
+          <img src="asset/cmlab_logo.png" class="affil-icon affil-icon-cmlab" alt="CMLab" />
+          &nbsp;·&nbsp;
+          <sup>2</sup>Adobe Research
+          <img src="asset/adobe.png" class="affil-icon" alt="Adobe" />
+        </span>
+        <div class="cofirst-note"><sup>*</sup>Equal contribution (co-first authors)</div>
+      </div>
+
+      <div class="action-buttons">
+        <a class="action-btn" href="static/pdfs/refgc-sr2.pdf" target="_blank">
+          <span class="icon"><i class="ai-icon">📄</i></span>
+          <span>Paper</span>
+        </a>
+        <a class="action-btn" href="#" target="_blank">
+          <span class="icon"><i class="ai-icon">arXiv</i></span>
+          <span>arXiv <span class="soon-tag">soon</span></span>
+        </a>
+        <a class="action-btn" href="#" target="_blank">
+          <span class="icon"><i class="ai-icon">{ }</i></span>
+          <span>Code <span class="soon-tag">soon</span></span>
+        </a>
+        <a class="action-btn" href="#" target="_blank">
+          <span class="icon"><i class="ai-icon">🗂</i></span>
+          <span>Dataset <span class="soon-tag">soon</span></span>
+        </a>
+        <a class="action-btn" href="#bibtex">
+          <span class="icon"><i class="ai-icon">¶</i></span>
+          <span>BibTeX</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TEASER (Figure 1) ====================== -->
+<section class="section section-teaser">
+  <div class="container">
+
+    <div class="tldr-card">
+      <span class="tldr-label">TL;DR</span>
+      <p class="tldr-text">
+        <strong>RefGC-SR<sup>2</sup></strong> is the first task that
+        <em>jointly super-resolves and refines</em> reference-guided AI-generated images
+        by <em>reusing the user-provided high-resolution reference image</em> at the post-processing stage,
+        supported by the first real-world triplet dataset and a frequency-aware DiT-based model.
+      </p>
+    </div>
+
+    <div class="teaser-container">
+      <img src="static/images/teaser.png" alt="RefGC-SR² teaser" class="teaser-image" />
+      <p class="figure-caption">
+        <strong>Figure 1.</strong> Reference-guided Generated Content Super-Resolution-Refinement (RefGC-SR<sup>2</sup>).
+        Existing reference-guided generation pipelines first produce a low-resolution generated image (LRGI) from a
+        high-resolution reference image (HRRI), but the output often suffers from four common generative artifacts:
+        <span class="artifact-tag a1">identity distortion</span>,
+        <span class="artifact-tag a1">detail inconsistency</span>,
+        <span class="artifact-tag a1">texture loss</span>, and
+        <span class="artifact-tag a1">overall quality degradation</span>.
+        We introduce <strong>RefGC-SR<sup>2</sup></strong>, a post-processing task that takes the LRGI and the HRRI as inputs,
+        and produces a high-resolution, artifact-refined output.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ABSTRACT ====================== -->
+<section class="section section-abstract has-light-bg">
+  <div class="container">
+    <h2 class="section-title">Abstract</h2>
+    <div class="abstract-text">
+      <p>
+        Reference-guided generation (e.g., object compositing, customization) has progressed rapidly,
+        yet current pipelines share a fundamental limitation: the object-centric high-resolution
+        reference image (HRRI) provided by users is downsampled to a fixed low-resolution (LR)
+        before being fed into the model, so the fine-grained details are discarded before the output
+        is even produced. In addition, the generation step then introduces its own artifacts
+        (e.g., identity distortion) on top of this loss. Existing reference-guided generated content refinement (RefGCR) methods can correct some
+        of these artifacts but still operate in the LR domain; reference-guided super-resolution
+        (RefSR) methods recover resolution but assume natural-image degradations and ignore the
+        artifact distribution of generative pipelines. To address both gaps in a single formulation,
+        we introduce a new task: <strong>reference-guided generated content
+        super-resolution-refinement (RefGC-SR<sup>2</sup>)</strong>, where the original HRRI is reused at the
+        post-processing stage to recover lost details, refine generative artifacts, and upscale
+        the output simultaneously. We construct the first real-world triplet data generation pipeline for this RefGC-SR<sup>2</sup>
+        task, training a diptych-conditioned generator to synthesize paired low-quality anchors
+        that public pretrained models cannot provide. We further present a frequency-aware
+        diffusion transformer model for RefGC-SR<sup>2</sup> that selectively injects fine details from the
+        HRRI while removing generative artifacts. Extensive experiments demonstrate that our
+        RefGC-SR<sup>2</sup> model successfully (i) refines the object identity faithfully with respect to the
+        reference, and (ii) recovers high-resolution details, so that the final result is significantly
+        higher quality and practically more usable compared to existing RefGCR and RefSR baselines.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== KEY CONTRIBUTIONS ====================== -->
+<section class="section section-contrib">
+  <div class="container">
+    <h2 class="section-title">Key Contributions</h2>
+    <div class="contrib-grid">
+
+      <div class="contrib-card">
+        <div class="contrib-num">01</div>
+        <h3 class="contrib-title">New Task</h3>
+        <p class="contrib-text">
+          We formulate <strong>RefGC-SR<sup>2</sup></strong>, the first post-processing task that <em>reuses</em>
+          the user-provided HRRI as a recovery source to jointly upscale and refine reference-guided generations.
+        </p>
+      </div>
+
+      <div class="contrib-card">
+        <div class="contrib-num">02</div>
+        <h3 class="contrib-title">New Dataset</h3>
+        <p class="contrib-text">
+          We construct <strong>RefGC-SR<sup>2</sup> Dataset</strong>, the first real-world
+          HRRI–HRGT-LRGI triplet dataset, built via our diptych-conditioned generator <strong>DipRefGC</strong>
+          that produces pose-aligned realistic generative artifacts.
+        </p>
+      </div>
+
+      <div class="contrib-card">
+        <div class="contrib-num">03</div>
+        <h3 class="contrib-title">New Model</h3>
+        <p class="contrib-text">
+          We propose the first <strong>RefGC-SR<sup>2</sup>-targeted model</strong> with
+          <em>frequency-aware</em> modules (FreqMoLE + frequency-based loss) injected into a frozen
+          FLUX-Kontext backbone to remove artifacts while increasing resolution.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TASK POSITIONING (Table 1) ====================== -->
+<section class="section section-positioning has-light-bg">
+  <div class="container">
+    <h2 class="section-title">Positioning Our Task</h2>
+    <p class="section-lead">
+      <strong>RefGC-SR<sup>2</sup></strong> is the first task that jointly satisfies all four criteria:
+      a <em>generated content</em> input, a <em>high-resolution reference</em> input,
+      <em>super-resolution</em>, and <em>artifact refinement</em>.
+    </p>
+
+    <div class="table-wrap">
+      <table class="positioning-table">
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th colspan="4" class="cat-sr">Super-Resolution Category</th>
+            <th colspan="4" class="cat-ref">Refinement Category</th>
+            <th class="cat-ours">Ours</th>
+          </tr>
+          <tr class="sub-head">
+            <th></th>
+            <th>ISR</th><th>RefSR</th><th>GCSR</th><th>RefGCSR</th>
+            <th>IR</th><th>RefR</th><th>GCR</th><th>RefGCR</th>
+            <th>RefGC-SR<sup>2</sup></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>GC input</th><td>✗</td><td>✗</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td><td>✓</td><td>✓</td><td class="cell-ours">✓</td></tr>
+          <tr><th>HRRI</th><td>✗</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td><td>✓</td><td>✗</td><td>✓</td><td class="cell-ours">✓</td></tr>
+          <tr><th>SR</th><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td class="cell-ours">✓</td></tr>
+          <tr><th>Refinement</th><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td class="cell-ours">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-caption">
+      <strong>Table 1.</strong> Comparison of related image enhancement tasks.
+      RefGC-SR<sup>2</sup> is the first task that jointly satisfies all four criteria.
+    </p>
+  </div>
+</section>
+
+<!-- ====================== DATASET (Figure 2 + Figure 3) ====================== -->
+<section class="section section-method">
+  <div class="container">
+    <h2 class="section-title">Dataset Construction</h2>
+    <p class="section-lead">
+      We curate real-world (HRGT, HRRI) pairs from multi-view videos and synthesise pose-aligned LRGIs
+      with <strong>DipRefGC</strong>, our diptych-conditioned RefGC generator.
+    </p>
+
+    <!-- Figure 2: dataset pipeline -->
+    <div class="method-figure">
+      <img src="static/images/dataset_pipeline.png" alt="Dataset construction pipeline" />
+      <p class="figure-caption">
+        <strong>Figure 2.</strong> Construction pipeline of our RefGC-SR<sup>2</sup> Dataset.
+        Stage 1 curates real-world HRRI-HRGT pairs from object-centric multi-view videos through
+        VLM-based filtering, masking, and human validation.
+        Stage 2 synthesises the corresponding LRGI with DipRefGC, which combines HRRI appearance
+        with HRGT-derived pose conditions using Inpainting and Canny ControlNets.
+        This produces pose-consistent, generative artifact-containing LRGIs paired with HRRI and HRGT.
+      </p>
+    </div>
+
+    <!-- DipRefGC insight -->
+    <div class="insight-box">
+      <h3 class="insight-title">Why DipRefGC?</h3>
+      <p>
+        Naively running off-the-shelf RefGC models alters the object pose between LRGI and HRGT,
+        breaking pixel-level supervision. DipRefGC adopts a <strong>diptych formulation</strong>
+        that <em>spatially disentangles appearance and pose</em>:
+        the <strong>left panel</strong> carries the segmented HRRI as the appearance reference,
+        while the <strong>right panel</strong> carries HRGT-derived structural conditions
+        (background, object mask, Canny edge).
+        Two LoRA-tuned ControlNets independently control <em>what</em> to generate (appearance)
+        and <em>how</em> to generate it (pose).
+      </p>
+    </div>
+
+    <!-- Figure 3: Triplet examples -->
+    <div class="method-figure triplet-figure">
+      <img src="static/images/triplet_examples.png" alt="Triplet examples" />
+      <p class="figure-caption">
+        <strong>Figure 3.</strong> RefGC-SR<sup>2</sup> triplet examples with LRGI (DipRefGC output),
+        HRRI (object appearance), and HRGT (object pose). DipRefGC produces pose-aligned LRGIs
+        with realistic generative artifacts suitable for supervised training.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== MODEL (Figure 4 + Figure 5) ====================== -->
+<section class="section section-model has-light-bg">
+  <div class="container">
+    <h2 class="section-title">Model: Frequency-Aware DiT for RefGC-SR<sup>2</sup></h2>
+    <p class="section-lead">
+      Our RefGC-SR<sup>2</sup> Model freezes a FLUX-Kontext backbone and injects
+      <strong>FreqMoLE</strong> (Frequency-adaptive Mixture of LoRA Experts) into every DiT block,
+      supervised by a <strong>frequency-based loss</strong> that aligns low frequencies with HRGT and
+      high frequencies with HRRI.
+    </p>
+
+    <!-- Figure 5: Motivation -->
+    <div class="method-figure motivation-figure">
+      <img src="static/images/motivation.png" alt="Frequency motivation experiments" />
+      <p class="figure-caption">
+        <strong>Figure 5.</strong> Motivation experiments for our method.
+        <strong>(a)</strong> shows the layer-wise frequency characteristics of the FLUX-Kontext model —
+        LF saturates within the first ~5% of layers while HF emerges in the last ~10%.
+        <strong>(b)</strong> compares the similarity between latent features of LRGI, HRRI, and HRGT.
+        <strong>(c)</strong> shows the low-frequency similarity — LRGI features are consistently closer to HRGT
+        than HRRI on LF components (197/200 cases).
+      </p>
+    </div>
+
+    <!-- Figure 4: Model overview -->
+    <div class="method-figure">
+      <img src="static/images/model_overview.png" alt="RefGC-SR² model overview" />
+      <p class="figure-caption">
+        <strong>Figure 4.</strong> Overview of our RefGC-SR<sup>2</sup> model.
+        The frozen VAE encodes the inputs (LRGI, HRRI, HRGT (train only)) and T5 encodes the text prompt.
+        We insert trainable FreqMoLE modules into a frozen FLUX-Kontext backbone, supervised by our
+        frequency-based loss $\mathcal{L}_f$ that aligns low-frequency components with HRGT and matches
+        object-region high-frequency statistics with HRRI.
+      </p>
+    </div>
+
+    <!-- Two-column design rationale -->
+    <div class="design-grid">
+      <div class="design-card lf-card">
+        <div class="design-header">
+          <span class="freq-pill lf-pill">Low&nbsp;Frequency</span>
+          <span class="design-where">Early DiT layers</span>
+        </div>
+        <p>
+          LF energy saturates within the first ~5% of FLUX-Kontext layers and primarily encodes
+          global structure. In the latent space, LRGI is consistently closer to HRGT than HRRI
+          on LF components.
+        </p>
+        <p class="design-sub">
+          ⇒ LF expert routed mainly through $\alpha$-weighted path, supervised against
+          <strong>HRGT</strong>.
+        </p>
+      </div>
+
+      <div class="design-card hf-card">
+        <div class="design-header">
+          <span class="freq-pill hf-pill">High&nbsp;Frequency</span>
+          <span class="design-where">Later DiT layers</span>
+        </div>
+        <p>
+          HF energy emerges sharply in the last ~10% of layers and encodes fine details.
+          Since HRRI and HRGT differ in viewpoint, we transfer HF detail via channel-wise statistics,
+          not pixel-wise alignment.
+        </p>
+        <p class="design-sub">
+          ⇒ HF expert routed mainly through $(1-\alpha)$ path, supervised against
+          <strong>HRRI</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Loss formula -->
+    <div class="formula-box">
+      <p class="formula-label">Overall objective</p>
+      <p class="formula">
+        $$\mathcal{L} \;=\; \mathcal{L}_{FM} \;+\; \mathcal{L}_f \;+\; \mathcal{L}_{aal},
+        \qquad
+        \mathcal{L}_f \;=\; \lambda_{LF}\,\mathcal{L}_{LF} \;+\; \lambda_{HF}\,\mathcal{L}_{HF}.$$
+      </p>
+      <p class="formula-desc">
+        $\mathcal{L}_{FM}$ is the flow-matching loss; $\mathcal{L}_{aal}$ is the
+        attention-alignment loss; $\mathcal{L}_f$ is our frequency-based loss.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== RESULTS — Table 2 + Figure 6 ====================== -->
+<section class="section section-results">
+  <div class="container">
+    <h2 class="section-title">Results</h2>
+    <p class="section-lead">
+      Our RefGC-SR<sup>2</sup> model achieves SOTA across SR, RefSR, and RefGCR baselines.
+    </p>
+
+    <!-- Table 2: Main quantitative -->
+    <div class="quant-block">
+      <h3 class="sub-title">Table 2. Quantitative Comparison on RefGC-SR<sup>2</sup> Benchmark</h3>
+      <div class="table-wrap">
+        <table class="quant-table">
+          <thead>
+            <tr>
+              <th>Task</th><th>Model</th><th>Ref.</th>
+              <th>CLIP-I↑</th><th>DINO↑</th><th>PSNR↑</th><th>SSIM↑</th><th>LPIPS↓</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="4">SR</td><td>DiT4SR</td><td>✗</td><td>0.8156</td><td>0.6555</td><td>15.3762</td><td>0.4932</td><td>0.4282</td></tr>
+            <tr><td>DiT4SR*</td><td>✗</td><td>0.8186</td><td>0.6545</td><td>15.1005</td><td>0.5726</td><td>0.3884</td></tr>
+            <tr><td>TSD-SR</td><td>✗</td><td>0.8224</td><td>0.6593</td><td>15.3725</td><td>0.5318</td><td>0.3766</td></tr>
+            <tr><td>TSD-SR*</td><td>✗</td><td>0.8238</td><td>0.6599</td><td>17.3098</td><td>0.6165</td><td><u>0.2849</u></td></tr>
+            <tr><td rowspan="3">RefSR</td><td>ReFIR</td><td>✓</td><td>0.8199</td><td>0.6689</td><td>15.5310</td><td>0.5343</td><td>0.4259</td></tr>
+            <tr><td>AdaRefSR</td><td>✓</td><td>0.8311</td><td>0.6858</td><td>15.6200</td><td>0.5629</td><td>0.3523</td></tr>
+            <tr><td>AdaRefSR*</td><td>✓</td><td>0.8310</td><td>0.6858</td><td>15.6200</td><td>0.5629</td><td>0.3523</td></tr>
+            <tr><td rowspan="3">RefGCR</td><td>OmniPaint</td><td>✓</td><td>0.7831</td><td>0.5720</td><td>13.4472</td><td>0.5486</td><td>0.5166</td></tr>
+            <tr><td>ImageCritic</td><td>✓</td><td>0.8536</td><td>0.7156</td><td><u>17.4391</u></td><td><u>0.6193</u></td><td>0.2991</td></tr>
+            <tr><td>ImageCritic*</td><td>✓</td><td><u>0.8542</u></td><td><u>0.7165</u></td><td>17.2090</td><td>0.6060</td><td>0.3039</td></tr>
+            <tr class="ours-row">
+              <td>RefGC-SR<sup>2</sup></td><td><strong>Ours</strong></td><td>✓</td>
+              <td><strong>0.8696</strong></td><td><strong>0.7474</strong></td>
+              <td><strong>17.5148</strong></td><td><strong>0.6335</strong></td><td><strong>0.2746</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption">
+        * denotes the model has been finetuned on our dataset.
+        Best <strong>bold</strong>, second-best <u>underlined</u>.
+      </p>
+    </div>
+
+    <!-- Figure 6: qualitative -->
+    <div class="qual-figure">
+      <h3 class="sub-title">Figure 6. Qualitative Comparison</h3>
+      <img src="static/images/qualitative.png" alt="Qualitative comparison" />
+      <p class="figure-caption">
+        (a) shows qualitative results on the RefGC-SR<sup>2</sup> Benchmark, while (b) and (c) present results
+        in the in-the-wild benchmark. Coloured arrows mark failure cases of competing methods,
+        and blue arrows indicate our results. Our RefGC-SR<sup>2</sup> model better preserves fine details
+        from HRRI and achieves high-quality upscaling compared to competing methods.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== IN-THE-WILD (Table 3 + Figure 7) ====================== -->
+<section class="section section-wild has-light-bg">
+  <div class="container">
+    <h2 class="section-title">In-the-Wild Evaluation</h2>
+    <p class="section-lead">
+      We further evaluate generalisation on outputs from real compositing
+      and customisation pipelines, treating them as LRGIs.
+    </p>
+
+    <div class="wild-grid">
+
+      <!-- Table 3 -->
+      <div class="wild-table-block">
+        <h3 class="sub-title" style="text-align:left;">Table 3. In-the-Wild Quantitative Results</h3>
+        <div class="table-wrap">
+          <table class="quant-table wild-quant-table">
+            <thead>
+              <tr>
+                <th rowspan="2">Model</th>
+                <th colspan="5">Compositing</th>
+                <th colspan="2">Customization</th>
+              </tr>
+              <tr class="sub-head">
+                <th>CLIP-I↑</th><th>DINO↑</th><th>PSNR↑</th><th>SSIM↑</th><th>LPIPS↓</th>
+                <th>CLIP-I↑</th><th>DINO↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>DiT4SR*</td><td>0.8101</td><td>0.6057</td><td>13.6421</td><td>0.4781</td><td>0.4751</td><td>0.7184</td><td>0.3565</td></tr>
+              <tr><td>TSD-SR*</td><td>0.8188</td><td>0.5770</td><td>14.8691</td><td>0.4901</td><td><u>0.4253</u></td><td>0.7132</td><td>0.3160</td></tr>
+              <tr><td>ReFIR</td><td>0.8026</td><td>0.5506</td><td>14.0969</td><td>0.4834</td><td>0.4805</td><td>0.7106</td><td>0.3260</td></tr>
+              <tr><td>AdaRefSR*</td><td>0.8290</td><td>0.6081</td><td>14.2231</td><td>0.4840</td><td>0.4341</td><td>0.7206</td><td>0.3406</td></tr>
+              <tr><td>OmniPaint</td><td>0.7945</td><td>0.5570</td><td>14.1785</td><td>0.4873</td><td>0.4947</td><td>0.7106</td><td>0.3213</td></tr>
+              <tr><td>ImageCritic*</td><td><u>0.8407</u></td><td><u>0.6446</u></td><td><u>14.9504</u></td><td><u>0.5045</u></td><td>0.4335</td><td><u>0.7240</u></td><td><u>0.3659</u></td></tr>
+              <tr class="ours-row">
+                <td><strong>Ours</strong></td>
+                <td><strong>0.8476</strong></td><td><strong>0.6626</strong></td><td><strong>15.1028</strong></td><td><strong>0.5063</strong></td><td><strong>0.4170</strong></td>
+                <td><strong>0.7280</strong></td><td><strong>0.3771</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-caption" style="text-align:left;">
+          Outputs from compositing (DreamFuse, InsertAnything) and customisation (FreeCus, PersonalizeAnything) treated as LRGI.
+        </p>
+      </div>
+
+      <!-- Figure 7 + user study stats -->
+      <div class="wild-userstudy-block">
+        <h3 class="sub-title" style="text-align:left;">Figure 7. User Study</h3>
+        <img src="static/images/user_study_main.png" alt="User study results" class="userstudy-figure" />
+        <p class="figure-caption" style="text-align:left;">
+          Top-rank-1 user study with 16 participants comparing one model from each of
+          SR, RefSR, and RefGCR vs. RefGC-SR<sup>2</sup> (Ours).
+        </p>
+
+        <div class="userstudy-grid">
+          <div class="us-card">
+            <div class="us-value">83<span class="us-percent">%</span></div>
+            <div class="us-label">Refine quality</div>
+          </div>
+          <div class="us-card">
+            <div class="us-value">82<span class="us-percent">%</span></div>
+            <div class="us-label">Detail quality</div>
+          </div>
+          <div class="us-card">
+            <div class="us-value">83<span class="us-percent">%</span></div>
+            <div class="us-label">Overall quality</div>
+          </div>
+        </div>
+        <p class="us-baseline-text">
+          Competing baselines receive top-1 votes in at most 8% of cases.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ABLATION (Table 4 + Figure 8) ====================== -->
+<section class="section section-ablation">
+  <div class="container">
+    <h2 class="section-title">Ablation Study</h2>
+    <p class="section-lead">
+      We ablate the two proposed components — <strong>FreqMoLE</strong> and the
+      <strong>frequency-based loss</strong> $\mathcal{L}_f$ — and find that both are essential.
+    </p>
+
+    <div class="ablation-grid">
+
+      <!-- Table 4 -->
+      <div class="ablation-table-block">
+        <h3 class="sub-title" style="text-align:left;">Table 4. Ablation of Proposed Components</h3>
+        <div class="table-wrap">
+          <table class="quant-table ablation-quant-table">
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>(a)</th><th>(b)</th><th>(c)</th><th class="th-ours">(d) Ours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="component-row"><th>FreqMoLE</th><td>✗</td><td>✗</td><td>✓</td><td class="cell-ours">✓</td></tr>
+              <tr class="component-row"><th>$\mathcal{L}_f$</th><td>✗</td><td>✓</td><td>✗</td><td class="cell-ours">✓</td></tr>
+              <tr><th>CLIP-I↑</th><td>0.8437</td><td>0.8654</td><td><u>0.8673</u></td><td class="cell-ours"><strong>0.8696</strong></td></tr>
+              <tr><th>DINO↑</th><td>0.6870</td><td><u>0.7386</u></td><td>0.7317</td><td class="cell-ours"><strong>0.7474</strong></td></tr>
+              <tr><th>PSNR↑</th><td>16.3956</td><td>17.1981</td><td><u>17.3893</u></td><td class="cell-ours"><strong>17.5148</strong></td></tr>
+              <tr><th>SSIM↑</th><td>0.6068</td><td><u>0.6221</u></td><td><u>0.6221</u></td><td class="cell-ours"><strong>0.6335</strong></td></tr>
+              <tr><th>LPIPS↓</th><td>0.3538</td><td><u>0.2835</u></td><td>0.2896</td><td class="cell-ours"><strong>0.2746</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-caption" style="text-align:left;">
+          Both FreqMoLE and $\mathcal{L}_f$ are complementary — the full model (d) achieves the best on all five metrics.
+        </p>
+      </div>
+
+      <!-- Figure 8 -->
+      <div class="ablation-figure-block">
+        <h3 class="sub-title" style="text-align:left;">Figure 8. Qualitative Ablation</h3>
+        <img src="static/images/ablation_qual.png" alt="Qualitative ablation results" />
+        <p class="figure-caption" style="text-align:left;">
+          Without $\mathcal{L}_f$, the model directly injects HRRI into the output (over-transfer);
+          without FreqMoLE, fine details such as transparency are not properly restored.
+          The full model (d) effectively transfers fine details from HRRI while correcting mismatched regions.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================== BIBTEX ====================== -->
+<section class="section section-bibtex" id="bibtex">
+  <div class="container">
+    <h2 class="section-title">BibTeX</h2>
+    <pre class="bibtex-block"><code>@inproceedings{sung2026refgcsr2,
+  title     = {RefGC-SR\textsuperscript{2}: Reference-guided Super-Resolution and Refinement of AI Generated Content},
+  author    = {Sung, Jeahun and Kye, Dahyeon and Kim, Soo Ye and Oh, Jihyong},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2026},
+  note      = {Jeahun Sung and Dahyeon Kye contributed equally.},
+}</code></pre>
+    <button class="copy-btn" onclick="copyBibtex()">Copy BibTeX</button>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="footer">
+  <div class="container has-text-centered">
+    <p class="footer-text">
+      Project page template inspired by
+      <a href="https://nerfies.github.io/" target="_blank">Nerfies</a>,
+      <a href="https://genprop.github.io/" target="_blank">GenProp</a>, and
+      <a href="https://www.anjiecheng.me/sr3d" target="_blank">SR-3D</a>.
+      Source code released under CC BY-SA 4.0.
+    </p>
+  </div>
+</footer>
+
+<script src="static/js/main.js"></script>
+</body>
+</html>
