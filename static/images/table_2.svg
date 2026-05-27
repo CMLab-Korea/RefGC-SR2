@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 388" width="100%" preserveAspectRatio="xMidYMid meet" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>
+<rect x="0" y="0" width="1020" height="388" fill="#ffffff"/>
+<line x1="24" y1="22" x2="996" y2="22" stroke="#1f2328" stroke-width="1.5"/>
+<text x="84" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">Task</text>
+<text x="154" y="44.86" text-anchor="start" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">Model</text>
+<text x="404" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">Reference</text>
+<text x="514" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">CLIP-I ↑</text>
+<text x="624" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">DINO ↑</text>
+<text x="739" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">PSNR ↑</text>
+<text x="849" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">SSIM ↑</text>
+<text x="964" y="44.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">LPIPS ↓</text>
+<line x1="24" y1="58" x2="996" y2="58" stroke="#1f2328" stroke-width="1"/>
+<text x="154" y="76.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>DiT4SR (ICCV'25)</text>
+<text x="404" y="76.68" text-anchor="middle" fill="#cf222e" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✗</text>
+<text x="514" y="76.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8156</text>
+<text x="624" y="76.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6555</text>
+<text x="739" y="76.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>15.3762</text>
+<text x="849" y="76.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.4932</text>
+<text x="964" y="76.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.4282</text>
+<text x="154" y="104.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>DiT4SR* (ICCV'25)</text>
+<text x="404" y="104.68" text-anchor="middle" fill="#cf222e" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✗</text>
+<text x="514" y="104.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8186</text>
+<text x="624" y="104.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6545</text>
+<text x="739" y="104.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>15.1005</text>
+<text x="849" y="104.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5726</text>
+<text x="964" y="104.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.3884</text>
+<text x="154" y="132.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>TSD-SR (CVPR'25)</text>
+<text x="404" y="132.68" text-anchor="middle" fill="#cf222e" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✗</text>
+<text x="514" y="132.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8224</text>
+<text x="624" y="132.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6593</text>
+<text x="739" y="132.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>15.3725</text>
+<text x="849" y="132.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5318</text>
+<text x="964" y="132.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.3766</text>
+<text x="154" y="160.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>TSD-SR* (CVPR'25)</text>
+<text x="404" y="160.68" text-anchor="middle" fill="#cf222e" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✗</text>
+<text x="514" y="160.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8238</text>
+<text x="624" y="160.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6599</text>
+<text x="739" y="160.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>17.3098</text>
+<text x="849" y="160.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6165</text>
+<text x="964" y="160.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' text-decoration="underline">0.2849</text>
+<text x="154" y="188.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>ReFIR (NeurIPS'24)</text>
+<text x="404" y="188.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="188.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8199</text>
+<text x="624" y="188.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6689</text>
+<text x="739" y="188.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>15.5310</text>
+<text x="849" y="188.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5343</text>
+<text x="964" y="188.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.4259</text>
+<text x="154" y="216.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>AdaRefSR (ICLR'26)</text>
+<text x="404" y="216.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="216.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8311</text>
+<text x="624" y="216.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6858</text>
+<text x="739" y="216.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>15.6200</text>
+<text x="849" y="216.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5629</text>
+<text x="964" y="216.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.3523</text>
+<text x="154" y="244.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>AdaRefSR* (ICLR'26)</text>
+<text x="404" y="244.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="244.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8310</text>
+<text x="624" y="244.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6858</text>
+<text x="739" y="244.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>15.6200</text>
+<text x="849" y="244.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5629</text>
+<text x="964" y="244.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.3523</text>
+<text x="154" y="272.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>OmniPaint (ICCV'25)</text>
+<text x="404" y="272.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="272.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.7831</text>
+<text x="624" y="272.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5720</text>
+<text x="739" y="272.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>13.4472</text>
+<text x="849" y="272.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5486</text>
+<text x="964" y="272.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.5166</text>
+<text x="154" y="300.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>ImageCritic (CVPR'26)</text>
+<text x="404" y="300.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="300.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.8536</text>
+<text x="624" y="300.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.7156</text>
+<text x="739" y="300.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' text-decoration="underline">17.4391</text>
+<text x="849" y="300.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' text-decoration="underline">0.6193</text>
+<text x="964" y="300.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.2991</text>
+<text x="154" y="328.68" text-anchor="start" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>ImageCritic* (CVPR'26)</text>
+<text x="404" y="328.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="328.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' text-decoration="underline">0.8542</text>
+<text x="624" y="328.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' text-decoration="underline">0.7165</text>
+<text x="739" y="328.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>17.2090</text>
+<text x="849" y="328.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.6060</text>
+<text x="964" y="328.68" text-anchor="middle" fill="#1f2328" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif'>0.3039</text>
+<rect x="24" y="338" width="972" height="28" fill="rgba(255,183,77,0.18)"/>
+<text x="154" y="356.68" text-anchor="start" fill="#000000" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">Ours</text>
+<text x="404" y="356.68" text-anchor="middle" fill="#1a7f37" font-size="14" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">✓</text>
+<text x="514" y="356.68" text-anchor="middle" fill="#000000" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">0.8696</text>
+<text x="624" y="356.68" text-anchor="middle" fill="#000000" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">0.7474</text>
+<text x="739" y="356.68" text-anchor="middle" fill="#000000" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">17.5148</text>
+<text x="849" y="356.68" text-anchor="middle" fill="#000000" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">0.6335</text>
+<text x="964" y="356.68" text-anchor="middle" fill="#000000" font-size="13" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">0.2746</text>
+<text x="84" y="118.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">SR</text>
+<text x="84" y="216.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">RefSR</text>
+<text x="84" y="300.86" text-anchor="middle" fill="#0d1117" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">RefGCR</text>
+<text x="84" y="356.86" text-anchor="middle" fill="#000000" font-size="13.5" font-family='Inter, system-ui, -apple-system, "Segoe UI", sans-serif' font-weight="700">RefGC-SR²</text>
+<line x1="74" y1="170" x2="996" y2="170" stroke="#bfc6cd" stroke-width="0.8"/>
+<line x1="74" y1="254" x2="996" y2="254" stroke="#bfc6cd" stroke-width="0.8"/>
+<line x1="74" y1="338" x2="996" y2="338" stroke="#bfc6cd" stroke-width="0.8"/>
+<line x1="24" y1="366" x2="996" y2="366" stroke="#1f2328" stroke-width="1.5"/>
+</svg>
