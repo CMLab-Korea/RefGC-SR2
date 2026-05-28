@@ -70,20 +70,24 @@ GitHub repo의 Settings → Pages에서 `main` branch / `/` (root)로 설정.
 - **arXiv 링크**: `index.html` 검색 `href="#"` → 실제 링크
 - **GitHub repo**: 동일
 - **HuggingFace dataset**: 동일
-- **색상 변경**: `style.css` 상단 `:root` 변수 수정
-  - `--color-lf`: low-frequency 색상 (현재 blue)
-  - `--color-hf`: high-frequency 색상 (현재 pink)
-  - `--color-mid`: 중간 색상 (현재 purple)
+- **색상 변경**: `style.css` 상단 `:root` 변수 수정. 팔레트는 3개 의미 그룹으로 분리되어 있습니다.
+  - **Lab anchor (CMLab #0D207F 기반)**: `--color-lab`, `--color-lab-2`, `--color-lab-3`, `--color-lab-light`, `--color-lab-soft`
+    → 페이지의 1차 UI 색(타이틀 그라데이션, 액션 버튼 hover, footer 링크, contribution 강조 등)
+  - **Data triplet (논문 Figure 4 색)**: `--color-HRRI` (tan), `--color-HRGT` (sage green), `--color-LRGI` (lavender)
+    → 데이터 태그/뱃지에서만 사용 (예: showcase의 LRGI/HRRI tag, 데이터셋 섹션)
+  - **Frequency expert (논문 Figure 4–5 색)**: `--color-lf` (blue), `--color-hf` (coral)
+    → 모델 섹션의 LF/HF 카드, 글리치 애니메이션 등 주파수 의미가 있는 자리에만 사용
+  - 기존 `--color-pose / --color-dist / --color-domain / --color-accent / --color-emph-*`는 위 세 그룹에 매핑된 alias로 남아 있습니다. 새 색이 필요할 땐 alias가 아니라 상단 의미 그룹의 변수를 사용하세요.
 
 ## 디자인 컨셉
 
-본인 paper의 핵심 통찰인 **frequency-aware** 아이디어를 페이지 디자인에 반영:
+CMLab 브랜드 색 #0D207F를 앵커로 두고, 논문 figure의 의미 색을 보조 축으로 사용합니다:
 
-- **Title gradient**: LF blue → HF pink (페이지 상단 4px 라인 + 메인 title)
-- **Animated subtitle**: 단어별 fade-in, "Super-Resolution" 파랑 / "Refinement" 핑크
-- **Design cards**: LF/HF 카드가 각각 다른 border-top 색
-- **User study stats**: gradient text로 강조
-- **Contribution cards**: hover시 LF→HF 그라데이션 라인 등장
+- **Title gradient**: lab navy → 보라 midpoint → HF coral (브랜드 → 모델 출력 강조 방향)
+- **Hero / TL;DR / contribution / 액션 버튼 hover**: lab 계열로 일관 처리
+- **Model 섹션의 LF/HF 카드**: LF blue / HF coral — 주파수 의미가 있는 곳에만 한정
+- **데이터셋 섹션의 DipRefGC insight**: lab-light anchor (frequency 색과 충돌 회피)
+- **User study stats**: HRRI tan → HRRI light gradient text로 강조
 
 ## 페이지 섹션 흐름
 

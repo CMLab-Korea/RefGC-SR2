@@ -1,52 +1,74 @@
 /* ============================================
-   RefGC-SR짼 Project Page �� DARK THEME
-   Brand palette (simplified):
-   �� Lab       = #0D207F (navy)   �� CMLab theme
-   �� Accent    = #FFB74D (amber)  �� model name & primary accent
-   �� Emph-1    = #F7CF95 (light amber) �� model emphasis
-   �� Emph-2    = #EF857D (coral)       �� model emphasis
-   �� Emph-3    = #5383EC (blue)        �� model emphasis
+   RefGC-SR² Project Page — DARK THEME
+   Cohesive palette derived from:
+     • CMLab brand   = #0D207F (navy)        → page anchor / primary
+     • Paper figures = HRRI / HRGT / LRGI    → data-triplet semantics
+     • Paper figures = LF / HF expert colors → frequency semantics
+
+   Naming groups:
+     --color-lab-*    : research-group brand (UI primary action)
+     --color-HRRI/HRGT/LRGI : data-triplet tags from paper Fig.4
+     --color-lf / --color-hf : frequency-expert colors from paper Fig.4-5
+
+   Legacy variables (pose/domain/dist/accent/emph-*) are kept as aliases
+   so existing rules stay valid but resolve to the new semantic set.
    ============================================ */
 
 :root {
-  /* === New simplified palette === */
-  --color-lab: #0D207F;        /* CMLab navy */
-  --color-accent: #FFB74D;     /* main amber �� model name */
-  --color-emph-1: #F7CF95;     /* light amber */
-  --color-emph-2: #EF857D;     /* coral */
-  --color-emph-3: #5383EC;     /* blue */
+  /* === LAB ANCHOR (research-group brand) === */
+  --color-lab:        #0D207F;   /* base — CMLab navy */
+  --color-lab-2:      #1F3199;   /* slightly lighter for hover */
+  --color-lab-3:      #3B4DB5;   /* UI primary action / accent */
+  --color-lab-light:  #6B7FD0;   /* light accent */
+  --color-lab-soft:   #C9D1EE;   /* very subtle / borders */
 
-  /* === Legacy aliases (mapped to new palette) === */
-  --color-pose: #5383EC;       /* was teal �� blue */
-  --color-domain: #FFB74D;     /* amber (unchanged) */
-  --color-dist: #EF857D;       /* was purple �� coral */
+  /* === DATA TRIPLET (paper Figure 4 colors) === */
+  --color-HRRI:       #DEB37B;   /* warm tan */
+  --color-HRRI-light: #EBC798;
+  --color-HRGT:       #78B19B;   /* sage green */
+  --color-HRGT-light: #95C2B0;
+  --color-LRGI:       #CD99E0;   /* lavender */
+  --color-LRGI-light: #DDB3EB;
+  --color-output:     #4285F4;
 
-  --color-LRGI: #CD99E0;       /* was green �� light green */
-  --color-HRRI: #DEB37B;       /* was green �� light green */
-  --color-HRGT: #78B19B;       /* was green �� light green */
-  --color-output: #4285F4;       /* was green �� light green */
+  /* === FREQUENCY EXPERT (paper Figure 4-5 colors) === */
+  --color-lf:         #5383EC;   /* low-frequency blue */
+  --color-lf-light:   #7DA1F5;
+  --color-lf-dark:    #2E5BC6;
+  --color-hf:         #EF857D;   /* high-frequency coral */
+  --color-hf-light:   #F4A5A0;
+  --color-hf-dark:    #C95B53;
 
-  /* Lighter / darker variants */
-  --color-pose-light: #7DA1F5;
-  --color-pose-dark: #2E5BC6;
-  --color-domain-light: #FFCB7A;
-  --color-domain-dark: #C68433;
-  --color-dist-light: #F4A5A0;
-  --color-dist-dark: #C95B53;
-  --color-lab-light: #2C3E9B;
+  /* === LEGACY ALIASES (do not introduce new colors) === */
+  --color-pose:        var(--color-lf);
+  --color-pose-light:  var(--color-lf-light);
+  --color-pose-dark:   var(--color-lf-dark);
+  --color-dist:        var(--color-hf);
+  --color-dist-light:  var(--color-hf-light);
+  --color-dist-dark:   var(--color-hf-dark);
+  --color-domain:      var(--color-HRRI);
+  --color-domain-light:var(--color-HRRI-light);
+  --color-domain-dark: #B8945C;
+  --color-accent:      var(--color-HRRI);        /* warm highlights */
+  --color-emph-1:      var(--color-HRRI-light);
+  --color-emph-2:      var(--color-hf);
+  --color-emph-3:      var(--color-lab-3);       /* UI primary → lab */
+  --color-output:       var(--color-hf);
+  --color-output-light: var(--color-hf-light);
+  --color-output-dark:  var(--color-hf-dark);
 
   /* === Dark theme neutrals === */
-  --bg-primary: #0a0e14;       /* near-black, page background */
-  --bg-secondary: #0f141c;     /* sections with light-bg variant */
-  --bg-card: #161c26;          /* card / table background */
-  --bg-elevated: #1c2330;      /* hover, elevated surfaces */
+  --bg-primary:   #0a0e14;       /* near-black, page background */
+  --bg-secondary: #0f141c;       /* sections with light-bg variant */
+  --bg-card:      #161c26;       /* card / table background */
+  --bg-elevated:  #1c2330;       /* hover, elevated surfaces */
 
-  --text-primary: #e6edf3;     /* main text */
-  --text-secondary: #adb8c5;   /* secondary text */
-  --text-muted: #6e7681;       /* muted, captions */
-  --text-disabled: #484f58;
+  --text-primary:   #ffffff;
+  --text-secondary: #adb8c5;
+  --text-muted:     #6e7681;
+  --text-disabled:  #484f58;
 
-  --border-light: #21262d;
+  --border-light:  #21262d;
   --border-medium: #30363d;
   --border-strong: #444c56;
 
@@ -54,11 +76,12 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
-  --glow-pose: 0 0 24px rgba(83, 131, 236, 0.15);
-  --glow-domain: 0 0 24px rgba(255, 183, 77, 0.15);
-  --glow-dist: 0 0 24px rgba(239, 133, 125, 0.15);
-  --glow-multi: 0 0 32px rgba(255, 183, 77, 0.12),
-                0 0 32px rgba(83, 131, 236, 0.10);
+  --glow-lab:    0 0 24px rgba(13,  32, 127, 0.30);
+  --glow-pose:   0 0 24px rgba(83, 131, 236, 0.15);
+  --glow-domain: 0 0 24px rgba(222, 179, 123, 0.18);
+  --glow-dist:   0 0 24px rgba(239, 133, 125, 0.15);
+  --glow-multi:  0 0 32px rgba(13,  32, 127, 0.18),
+                 0 0 32px rgba(239, 133, 125, 0.10);
 
   --container-max: 1100px;
 }
@@ -91,10 +114,11 @@ section.has-light-bg { background: var(--bg-secondary); }
    HERO
    ============================================ */
 .hero {
+  /* Lab-navy → coral wash matches the title's lab-anchored arc. */
   background:
-    radial-gradient(circle at 15% 20%, rgba(83, 131, 236, 0.10), transparent 45%),
-    radial-gradient(circle at 85% 25%, rgba(255, 183, 77, 0.08), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(239, 133, 125, 0.10), transparent 50%),
+    radial-gradient(circle at 18% 22%, rgba(13,  32, 127, 0.18), transparent 45%),
+    radial-gradient(circle at 82% 30%, rgba(13,  32, 127, 0.10), transparent 45%),
+    radial-gradient(circle at 50% 82%, rgba(239, 133, 125, 0.10), transparent 50%),
     var(--bg-primary);
   padding: 36px 0 28px;
   position: relative;
@@ -136,7 +160,8 @@ section.has-light-bg { background: var(--bg-secondary); }
   letter-spacing: -0.025em;
   margin: 0 0 15px 0;
   line-height: 1.05;
-  filter: drop-shadow(0 0 30px rgba(255, 183, 77, 0.25));
+  /* Lab-navy glow anchors the title to the brand color */
+  filter: drop-shadow(0 0 30px rgba(13, 32, 127, 0.35));
 }
 .title-superscript {
   font-size: 0.5em;
@@ -144,16 +169,21 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-weight: 800;
 }
 
-/* Component tags: shared mapping used in title, Table 1, etc. */
-.tag-ref { color: var(--color-pose); }
-.tag-gc  { color: var(--color-dist); }
-.tag-sr  { color: var(--color-HRGT); }
+/* Component tags: a continuous warm→cool arc, HRRI-tan → LRGI-lavender → blue.
+   Reads as "reference (Ref) → generated content (GC) → super-res output (SR²)".
+   The seams are 50/50 blends of the neighbouring base colors so the gradient
+   flows smoothly across the three segments:
+     • #D6A6AE = blend(--color-HRRI, --color-LRGI)  — Ref→GC seam
+     • #888FEA = blend(--color-LRGI, #4285F4)        — GC→SR seam */
+.tag-ref { color: var(--color-HRRI); }
+.tag-gc  { color: var(--color-LRGI); }
+.tag-sr  { color: #4285F4; }
 
-.title-main { color: color-mix(in hsl, #CD99E0, #78B19B); }
+.title-main { color: var(--color-LRGI); }
 .title-main .tag-ref {
   background: linear-gradient(90deg,
-    #DEB37B 0%,
-    color-mix(in hsl, #DEB37B, #CD99E0) 100%);
+    var(--color-HRRI) 0%,
+    #D6A6AE 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -161,9 +191,9 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-main .tag-gc {
   background: linear-gradient(90deg,
-    color-mix(in hsl, #DEB37B, #CD99E0) 0%,
-    #CD99E0 50%,
-    color-mix(in hsl, #CD99E0, #78B19B) 100%);
+    #D6A6AE 0%,
+    var(--color-LRGI) 50%,
+    #888FEA 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -171,8 +201,8 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-main .tag-sr {
   background: linear-gradient(90deg,
-    color-mix(in hsl, #CD99E0, #78B19B) 0%,
-    #78B19B 100%);
+    #888FEA 0%,
+    #4285F4 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -180,14 +210,13 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-main .title-superscript.tag-sr {
   background: none;
-  -webkit-text-fill-color: #78B19B;
-  color: #78B19B;
+  -webkit-text-fill-color: #4285F4;
+  color: #4285F4;
 }
 
 /* GC: no animation */
 
-/* SR² : TV-static glitch ("지지직") — visualizes the model wrestling
-   generative artifacts down into a clean high-res result */
+/* SR² : TV-static glitch */
 .title-main .tag-sr {
   display: inline-block;
   animation: sr-glitch 3.6s steps(1, end) infinite;
@@ -230,15 +259,6 @@ section.has-light-bg { background: var(--bg-secondary); }
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .title-main .tag-sr {
-    animation: none;
-    filter: none;
-    transform: none;
-    text-shadow: none;
-  }
-}
-
 /* Animated subtitle with paper colors */
 .subtitle-anim {
   font-size: clamp(1.425rem, 2.7vw, 1.875rem);
@@ -268,7 +288,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 .authors {
   font-size: 24px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--color-lab-light);
   margin-bottom: 9px;
   line-height: 1.6;
   display: flex;
@@ -282,14 +302,14 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .affiliations {
   font-size: 20.25px;
-  color: var(--text-muted);
+  color: var(--text-primary);
   margin-bottom: 24px;
   font-style: italic;
 }
 .affiliations .cofirst-note {
   font-size: 18px;
   margin-top: 3px;
-  color: var(--text-muted);
+  color: var(--text-primary);
   font-style: normal;
   letter-spacing: 0.01em;
 }
@@ -334,7 +354,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   will-change: transform;
 }
 .cofirst-name {
-  color: var(--color-domain-light);
+  color: var(--color-lab-light);
   font-weight: 600;
 }
 .cofirst-sep {
@@ -344,7 +364,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   opacity: 0.55;
 }
 .cofirst-mark {
-  color: var(--color-dist-light);
+  color: var(--color-lab-light);
   font-weight: 700;
   margin-left: 1px;
   font-size: 0.7em;
@@ -374,7 +394,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   background: var(--bg-card);
   color: var(--text-primary);
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.25s ease;
@@ -386,7 +406,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   border-color: var(--color-emph-3);
   color: var(--color-emph-3);
   transform: translateY(-2px);
-  box-shadow: var(--glow-pose);
+  box-shadow: var(--glow-lab);
 }
 .action-btn .icon {
   font-style: normal;
@@ -398,12 +418,12 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-style: normal;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
+  font-size: 16px;
   white-space: nowrap;
   line-height: 1;
 }
 .soon-tag {
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0.6;
   padding: 2px 6px;
   border: 1px solid currentColor;
@@ -415,14 +435,19 @@ section.has-light-bg { background: var(--bg-secondary); }
    TEASER
    ============================================ */
 .section-teaser { padding-top: 60px; }
+/* Widen the teaser container so the showcase carousel can host
+   meaningfully large input / output frames. Matches the pattern used
+   by the Positioning and In-the-Wild sections. */
+.section-teaser .container { max-width: 1320px; }
 
 .tldr-card {
   max-width: 800px;
   margin: 0 auto 48px;
   padding: 24px 32px;
+  /* Lab-navy → coral wash, picking up the title's anchor + output emphasis */
   background: linear-gradient(135deg,
-    rgba(83, 131, 236, 0.06),
-    rgba(255, 170, 65, 0.06));
+    rgba(13,  32, 127, 0.10),
+    rgba(239, 133, 125, 0.08));
   border-left: 4px solid var(--color-lab);
   border-radius: 8px;
   box-shadow: var(--shadow-sm);
@@ -432,7 +457,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .tldr-label {
   display: inline-block;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--color-emph-3);
@@ -440,7 +465,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   text-transform: uppercase;
 }
 .tldr-text {
-  font-size: 17px;
+  font-size: 19px;
   line-height: 1.7;
   color: var(--text-primary);
   margin: 0;
@@ -457,17 +482,17 @@ section.has-light-bg { background: var(--bg-secondary); }
   margin-top: 56px;
 }
 .teaser-image {
-  max-width: 60%;
+  max-width: 90%;
   border-radius: 12px;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-light);
 }
 .teaser-container .figure-caption {
-  max-width: 60%;
+  max-width: 90%;
 }
 
 /* ============================================
-   SHOWCASE �� ActionMesh-inspired compact flow gallery
+   SHOWCASE
    ============================================ */
 .showcase {
   margin: 34px auto 42px;
@@ -481,9 +506,9 @@ section.has-light-bg { background: var(--bg-secondary); }
   padding: 26px 22px 28px;
   border-radius: 24px;
   background:
-    radial-gradient(circle at 22% 22%, rgba(83,131,236,0.12), transparent 32%),
+    radial-gradient(circle at 22% 22%, rgba( 83,131,236,0.12), transparent 32%),
     radial-gradient(circle at 78% 24%, rgba(239,133,125,0.10), transparent 34%),
-    radial-gradient(circle at 50% 78%, rgba(255,183,77,0.10), transparent 38%),
+    radial-gradient(circle at 50% 82%, rgba( 13, 32,127,0.16), transparent 38%),
     linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012));
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-md);
@@ -509,6 +534,60 @@ section.has-light-bg { background: var(--bg-secondary); }
   z-index: 1;
 }
 
+/* Placeholder SVGs are decorative — dim them a touch so they read as
+   stand-ins, not real results. Real example images (loaded from /asset/)
+   stay fully saturated. The "Coming soon" ribbon at the top of the
+   showcase is the explicit communication channel. */
+.carousel-slide .demo-frame img[src*="placeholders"] {
+  filter: saturate(0.55) brightness(0.92);
+}
+
+/* ===== Category tabs (all options shown at once; active = highlighted) ===== */
+.carousel-tabs {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 24px;
+}
+
+.carousel-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  cursor: pointer;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+  transition: all 0.25s ease;
+}
+.carousel-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--color-emph-3);
+  transform: translateY(-1px);
+}
+/* Active tab mirrors the .action-btn:hover highlight. */
+.carousel-tab.is-active {
+  background: var(--bg-elevated);
+  border-color: var(--color-emph-3);
+  color: var(--color-emph-3);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-lab);
+}
+.carousel-tab:focus-visible {
+  outline: 2px solid var(--color-emph-3);
+  outline-offset: 3px;
+}
+
 /* ===== Category header (used inside each carousel slide) ===== */
 .demo-block-head {
   margin: 0 auto 22px;
@@ -516,36 +595,9 @@ section.has-light-bg { background: var(--bg-secondary); }
   text-align: center;
 }
 
-.demo-block-eyebrow {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.carousel-slide--bench .demo-block-eyebrow {
-  color: var(--color-domain-light);
-  background: rgba(255,183,77,0.14);
-  border: 1px solid rgba(255,183,77,0.45);
-}
-.carousel-slide--refgc .demo-block-eyebrow {
-  color: var(--color-pose-light);
-  background: rgba(83,131,236,0.14);
-  border: 1px solid rgba(83,131,236,0.45);
-}
-.carousel-slide--comm .demo-block-eyebrow {
-  color: var(--color-dist-light);
-  background: rgba(239,133,125,0.14);
-  border: 1px solid rgba(239,133,125,0.45);
-}
-
 .demo-block-title {
   margin: 4px 0 8px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.01em;
   color: var(--text-primary);
@@ -554,7 +606,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 .demo-block-desc {
   margin: 0 auto;
   max-width: 720px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.65;
   color: var(--text-secondary);
 }
@@ -563,7 +615,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* ===== Single-panel carousel ===== */
 .demo-carousel {
   position: relative;
-  padding: 0 64px;        /* room for the side arrows */
+  padding: 0 48px;        /* room for the side arrows */
 }
 
 .carousel-track {
@@ -656,7 +708,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   border-radius: 999px;
   max-width: 720px;
   text-align: center;
-  font-size: 14.5px;
+  font-size: 16px;
   font-style: italic;
   color: var(--text-primary);
   background: rgba(255,255,255,0.06);
@@ -671,31 +723,86 @@ section.has-light-bg { background: var(--bg-secondary); }
   margin: 0 2px;
 }
 
-/* ===== Stage: inputs | pipeline | output ===== */
+/* ===== Stage: LRGI → pipeline → Output on top row,
+        HRRI joins from below via a vertical up-arrow.
+
+   Middle column is pinned to the pipeline width so the horizontal arrow
+   has equal column-gap (= 12px) at both ends. HRRI (much wider) overflows
+   column 2 symmetrically via justify-self: center, which keeps it visually
+   centred on the same X axis as the pipeline arrow above it. ===== */
 .demo-stage {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto 196px auto;
+  grid-template-rows: auto auto;
   align-items: center;
   justify-content: center;
-  gap: 26px;
+  /* Tight, equal gap on both sides of the horizontal pipeline arrow */
+  column-gap: 12px;
+  /* Row-gap chosen so up-arrow has 3 px equal padding above and below */
+  row-gap: 20px;
   padding: 8px 4px 4px;
+}
+
+/* Explicit cell placement */
+.demo-card--lrgi { grid-column: 1; grid-row: 1; }
+.demo-pipeline   { grid-column: 2; grid-row: 1; }
+.demo-card--out  { grid-column: 3; grid-row: 1; }
+.demo-card--ref  {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  margin-top: 0;
+  /* Let the card take its natural width (frame + caption ≈ 384 px),
+     then centre it across column 2 so it overflows symmetrically into
+     the row-2 space below LRGI on the left and below Output on the right. */
+  width: max-content;
+  justify-self: center;
+}
+
+/* Up-arrow rising from the top of the HRRI card up to just below the
+   pipeline ("New task") content, so HRRI reads as feeding into the model.
+   The vertical span between the pipeline bottom and the HRRI card top is
+   dynamic (it grows with the frame size), so the line height + arrowhead
+   offset are driven by JS (syncRefArrow) via the two custom properties
+   below. The fallbacks reproduce the original short arrow if JS is absent.
+   Both ends keep an equal 3 px gap (tail ↔ HRRI top, tip ↔ pipeline bottom).
+   Colors: HRRI tan only (--color-HRRI). */
+.demo-card--ref::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: 3px;
+  transform: translateX(-50%);
+  width: 3px;
+  height: var(--ref-arrow-line-h, 14px);
+  background: linear-gradient(180deg, var(--color-HRRI-light), var(--color-HRRI));
+  border-radius: 2px;
+}
+.demo-card--ref::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: var(--ref-arrow-head-mb, 17px);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 12px solid var(--color-HRRI);
+  filter: drop-shadow(0 0 6px rgba(222, 179, 123, 0.50));
 }
 
 .demo-group-label {
   display: block;
   margin-bottom: 10px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
   text-align: center;
-}
-
-.demo-inputs-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
 }
 
 .demo-card {
@@ -722,26 +829,29 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 
 .demo-frame--lr {
-  width: 110px;
-  height: 110px;
+  width: 160px;
+  height: 160px;
   border-style: dashed;
-  border-color: rgba(83,131,236,0.55);
+  /* LRGI semantic: lavender (#CD99E0 = rgb 205 153 224) */
+  border-color: rgba(205, 153, 224, 0.65);
 }
 
 .demo-frame--hr {
-  width: 320px;
-  height: 320px;
+  width: 384px;
+  height: 384px;
 }
 
 .demo-card--hrri .demo-frame--hr {
-  border-color: rgba(255,183,77,0.55);
+  /* HRRI semantic: tan (#DEB37B = rgb 222 179 123) */
+  border-color: rgba(222, 179, 123, 0.65);
 }
 
 .demo-frame--ours {
-  border: 2px solid rgba(239,133,125,0.85);
+  /* Output semantic: coral (#EF857D = rgb 239 133 125) — same as --color-output */
+  border: 2px solid rgba(239, 133, 125, 0.85);
   box-shadow:
     0 14px 30px rgba(0,0,0,0.34),
-    0 0 0 4px rgba(239,133,125,0.16);
+    0 0 0 4px rgba(239, 133, 125, 0.18);
 }
 
 .demo-ours-badge {
@@ -750,12 +860,13 @@ section.has-light-bg { background: var(--bg-secondary); }
   right: 10px;
   padding: 4px 10px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #fff;
-  background: linear-gradient(100deg, #db2777, var(--color-accent));
+  /* Solid output coral — kept on-palette for the Output card */
+  background: linear-gradient(100deg, var(--color-output-dark), var(--color-output));
   box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
 
@@ -778,19 +889,22 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 
 .demo-tag--lrgi {
-  color: var(--color-pose-light);
-  background: rgba(83,131,236,0.14);
-  border: 1px solid rgba(83,131,236,0.45);
+  /* LRGI semantic: lavender */
+  color: var(--color-LRGI-light);
+  background: rgba(205, 153, 224, 0.18);
+  border: 1px solid rgba(205, 153, 224, 0.50);
 }
 .demo-tag--hrri {
-  color: var(--color-domain-light);
-  background: rgba(255,183,77,0.16);
-  border: 1px solid rgba(255,183,77,0.45);
+  /* HRRI semantic: warm tan */
+  color: var(--color-HRRI-light);
+  background: rgba(222, 179, 123, 0.20);
+  border: 1px solid rgba(222, 179, 123, 0.50);
 }
 .demo-tag--out {
+  /* Output semantic: coral only */
   color: #fff;
-  background: linear-gradient(100deg, #db2777, var(--color-accent));
-  border: 1px solid rgba(239,133,125,0.65);
+  background: linear-gradient(100deg, var(--color-output-dark), var(--color-output));
+  border: 1px solid rgba(239, 133, 125, 0.70);
 }
 
 .demo-res {
@@ -801,98 +915,109 @@ section.has-light-bg { background: var(--bg-secondary); }
   letter-spacing: 0.02em;
 }
 
-.demo-plus {
-  font-size: 26px;
-  font-weight: 900;
-  color: var(--text-muted);
-  user-select: none;
-  align-self: center;
-  transform: translateY(10px);
-}
-
-/* ===== Pipeline (model badge between inputs and output) ===== */
+/* ===== Pipeline (Figure 1-style: text labels around a horizontal arrow) ===== */
 .demo-pipeline {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 18px;
+  align-items: stretch;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  width: 196px;
+  text-align: center;
 }
 
+/* "New task RefGC-SR² (Ours)" — sits above the arrow */
+.demo-flow-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 14.5px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+.demo-flow-mark {
+  position: relative;
+  padding: 0 4px;
+  /* Marker-highlight echo of Figure 1's cream stripe behind "New task" */
+  background: linear-gradient(180deg, transparent 55%, rgba(222, 179, 123, 0.32) 55%);
+  border-radius: 2px;
+}
+.demo-flow-name {
+  background: linear-gradient(90deg, var(--color-lab-light), var(--color-hf));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.demo-flow-name sup {
+  font-size: 0.6em;
+  vertical-align: super;
+}
+.demo-flow-ours {
+  -webkit-background-clip: initial;
+          background-clip: initial;
+  -webkit-text-fill-color: var(--color-hf);
+          text-fill-color: var(--color-hf);
+  color: var(--color-hf);
+  font-weight: 700;
+  font-size: 0.88em;
+}
+
+/* The horizontal arrow itself.
+   Semantic gradient: starts at LRGI lavender (source), ends at output
+   coral (destination). Solid both ends so the visual arrow length
+   equals the pipeline width (no fade-in/out → equal gap to both frames). */
 .demo-arrow {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  margin: 2px 0;
+  background: linear-gradient(90deg,
+    var(--color-LRGI) 0%,
+    var(--color-output) 100%);
+  border-radius: 2px;
+}
+.demo-arrow::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-}
-.demo-arrow--in {
-  border-top: 13px solid rgba(255,255,255,0.30);
-  display: none;
-}
-.demo-arrow--out {
-  border-top: 13px solid rgba(255,255,255,0.30);
-  display: none;
+  border-left: 12px solid var(--color-output);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  filter: drop-shadow(0 0 6px rgba(239, 133, 125, 0.45));
 }
 
-.demo-pipeline::before,
-.demo-pipeline::after {
-  content: "";
-  width: 36px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.10), rgba(255,255,255,0.45), rgba(255,255,255,0.10));
-}
-.demo-pipeline::before {
-  margin-bottom: 4px;
-}
-.demo-pipeline::after {
-  margin-top: 4px;
-}
-
-.demo-model {
+/* "+ Super-Resolution" / "+ Refinement" — sit below the arrow */
+.demo-flow-bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 14px 22px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, var(--color-pose), #8b5cf6 50%, var(--color-accent));
-  box-shadow:
-    0 18px 36px rgba(0,0,0,0.36),
-    0 0 36px rgba(139,92,246,0.28);
+  gap: 1px;
+  font-size: 13.5px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.35;
 }
-
-.demo-model-name {
-  font-size: 22px;
+.demo-flow-op {
+  display: inline-block;
+  white-space: nowrap;
+}
+.demo-flow-op-plus {
+  color: var(--color-HRGT-light);
   font-weight: 900;
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-.demo-model-name sup {
-  font-size: 0.55em;
-  vertical-align: super;
-}
-
-.demo-model-ops {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.demo-op {
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 850;
-  letter-spacing: 0.04em;
-  background: rgba(255,255,255,0.18);
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.demo-op-and {
-  color: rgba(255,255,255,0.9);
-  font-weight: 900;
-  font-size: 13px;
+  font-style: normal;
+  margin-right: 4px;
 }
 
 /* ===== Notes ===== */
@@ -915,36 +1040,98 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 1180px) {
+@media (max-width: 1320px) {
+  /* Below the widened container, scale the showcase down a notch so the
+     three columns still fit comfortably side by side. */
   .demo-frame--hr {
-    width: 280px;
-    height: 280px;
+    width: 340px;
+    height: 340px;
   }
   .demo-frame--lr {
-    width: 96px;
-    height: 96px;
+    width: 140px;
+    height: 140px;
   }
+  .demo-pipeline { width: 180px; }
+  /* Keep horizontal arrow tight & up-arrow padding equal across sizes —
+     middle column tracks pipeline width so the right gap stays = column-gap. */
   .demo-stage {
-    gap: 20px;
+    grid-template-columns: auto 180px auto;
+    column-gap: 12px;
+    row-gap: 20px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .demo-frame--hr {
+    width: 296px;
+    height: 296px;
+  }
+  .demo-frame--lr {
+    width: 120px;
+    height: 120px;
+  }
+  .demo-pipeline { width: 170px; }
+  .demo-stage {
+    grid-template-columns: auto 170px auto;
+    column-gap: 10px;
+    row-gap: 20px;
   }
 }
 
 @media (max-width: 980px) {
+  /* Single-column stack: LRGI → HRRI → pipeline (vertical arrow) → Output.
+     The HRRI's upward arrow doesn't make sense in a linear stack, so we
+     hide it and let the pipeline arrow alone indicate model flow. */
   .demo-stage {
     grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-rows: none;
+    column-gap: 0;
+    row-gap: 14px;
+  }
+  .demo-card--lrgi { grid-column: 1; grid-row: auto; order: 1; }
+  .demo-card--ref  {
+    grid-column: 1;
+    grid-row: auto;
+    order: 2;
+    margin-top: 0;
+  }
+  .demo-card--ref::before,
+  .demo-card--ref::after { display: none; }
+  .demo-pipeline   { grid-column: 1; grid-row: auto; order: 3; }
+  .demo-card--out  { grid-column: 1; grid-row: auto; order: 4; }
+
+  .demo-frame--hr {
+    width: 380px;
+    height: 380px;
+  }
+  .demo-frame--lr {
+    width: 140px;
+    height: 140px;
   }
 
   .demo-pipeline {
-    flex-direction: row;
-    margin-top: 0;
+    width: auto;
+    min-width: 220px;
+    margin: 4px auto;
   }
-  .demo-pipeline::before,
-  .demo-pipeline::after {
-    width: 2px;
-    height: 32px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.45), rgba(255,255,255,0.10));
-    margin: 0 6px;
+  .demo-arrow {
+    width: 3px;
+    height: 56px;
+    margin: 6px auto;
+    /* Matches desktop semantic: LRGI lavender → output coral */
+    background: linear-gradient(180deg,
+      var(--color-LRGI) 0%,
+      var(--color-output) 100%);
+  }
+  .demo-arrow::after {
+    right: 50%;
+    top: auto;
+    bottom: -2px;
+    transform: translateX(50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 12px solid var(--color-output);
+    border-bottom: 0;
   }
 
   .demo-carousel { padding: 0 52px; }
@@ -957,29 +1144,18 @@ section.has-light-bg { background: var(--bg-secondary); }
     border-radius: 20px;
   }
 
-  .demo-inputs-row {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .demo-plus {
-    transform: none;
-  }
-
   .demo-frame--hr {
-    width: min(82vw, 320px);
-    height: min(82vw, 320px);
+    width: min(86vw, 380px);
+    height: min(86vw, 380px);
   }
   .demo-frame--lr {
-    width: 96px;
-    height: 96px;
+    width: 128px;
+    height: 128px;
   }
 
-  .demo-model {
-    padding: 12px 18px;
-  }
-  .demo-model-name {
-    font-size: 19px;
-  }
+  .demo-pipeline { min-width: 200px; }
+  .demo-flow-top { font-size: 15px; }
+  .demo-flow-bottom { font-size: 14px; }
 
   .demo-carousel { padding: 0 40px; }
   .carousel-arrow { width: 36px; height: 36px; font-size: 22px; }
@@ -1012,9 +1188,9 @@ section.has-light-bg { background: var(--bg-secondary); }
   border: 1px solid rgba(250, 13, 10, 0.3);
 }
 .artifact-tag.a2 {
-  background: rgba(255, 183, 77, 0.15);
+  background: rgba(222, 179, 123, 0.18);
   color: var(--color-domain-light);
-  border: 1px solid rgba(255, 183, 77, 0.3);
+  border: 1px solid rgba(222, 179, 123, 0.45);
 }
 .artifact-tag.a3 {
   background: rgba(83, 131, 236, 0.15);
@@ -1169,7 +1345,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   color: var(--text-primary);
 }
 .positioning-table .cell-ours {
-  background: rgba(255, 183, 77, 0.18);
+  background: rgba(222, 179, 123, 0.20);
   color: var(--color-accent);
   font-weight: 700;
 }
@@ -1182,7 +1358,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   text-align: center;
 }
 .method-figure img {
-  max-width: 80%;
+  max-width: 90%;
   border-radius: 12px;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-light);
@@ -1191,7 +1367,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 /* Caption sits directly under the figure image and matches its width. */
 .method-figure .figure-caption {
-  max-width: 80%;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1200,11 +1376,13 @@ section.has-light-bg { background: var(--bg-secondary); }
   margin: 40px auto 0;
   max-width: 880px;
   padding: 28px 32px;
+  /* Lab-anchored wash — keeps the model section's LF/HF blue/coral
+     reserved for actual frequency semantics. */
   background: linear-gradient(135deg,
-    rgba(83, 131, 236, 0.06),
-    rgba(255, 170, 65, 0.06));
+    rgba(13,  32, 127, 0.08),
+    rgba(222, 179, 123, 0.06));
   border-radius: 12px;
-  border-left: 4px solid var(--color-pose-light);
+  border-left: 4px solid var(--color-lab-light);
   border-top: 1px solid var(--border-light);
   border-right: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
@@ -1214,7 +1392,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-size: 18px;
   font-weight: 700;
   margin: 0 0 12px 0;
-  color: var(--color-pose-light);
+  color: var(--color-lab-light);
 }
 .insight-box p {
   font-size: 15px;
@@ -1225,7 +1403,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 .insight-box strong { color: var(--text-primary); }
 .insight-box em {
   font-style: normal;
-  color: var(--color-pose-light);
+  color: var(--color-lab-light);
   font-weight: 600;
 }
 
@@ -1234,13 +1412,13 @@ section.has-light-bg { background: var(--bg-secondary); }
    ============================================ */
 .triplet-figure { margin-top: 48px; }
 .triplet-figure img {
-  max-width: 720px;
-  width: 95%;
+  max-width: 90%;
+  width: 100%;
 }
 /* Caption of Figure 3 matches its image width. */
 .triplet-figure .figure-caption {
-  max-width: 720px;
-  width: 95%;
+  max-width: 90%;
+  width: 100%;
 }
 
 /* ============================================
@@ -1249,13 +1427,13 @@ section.has-light-bg { background: var(--bg-secondary); }
 .motivation-figure { margin-top: 56px; }
 .motivation-figure img,
 .model-overview-figure img {
-  max-width: 920px;
+  max-width: 90%;
   width: 100%;
 }
 /* Captions of Figure 4 / Figure 5 match their image width. */
 .motivation-figure .figure-caption,
 .model-overview-figure .figure-caption {
-  max-width: 920px;
+  max-width: 90%;
   width: 100%;
 }
 
@@ -1427,7 +1605,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 .quant-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
+  font-size: 15px;
   background: var(--bg-card);
   min-width: 680px;
   color: var(--text-secondary);
@@ -1448,9 +1626,9 @@ section.has-light-bg { background: var(--bg-secondary); }
 .quant-table tbody td:nth-child(2) {
   text-align: left;
 }
-/* Ours row �� amber highlight (model name color) */
+/* Ours row — warm HRRI-tan highlight (matches --color-accent) */
 .quant-table .ours-row {
-  background: rgba(255, 183, 77, 0.12);
+  background: rgba(222, 179, 123, 0.14);
   font-weight: 600;
 }
 .quant-table .ours-row td {
@@ -1472,7 +1650,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 
 .table-caption {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.65;
   max-width: 900px;
@@ -1488,7 +1666,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* Widen the container in the Positioning section so Table 1 and the
    Figure-1 illustration both render larger. */
 .section-positioning .container {
-  max-width: 1320px;
+  max-width: 1400px;
 }
 .positioning-grid .wild-table-block,
 .positioning-grid .wild-userstudy-block {
@@ -1527,7 +1705,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* Give Table 3 more horizontal space and reduce card padding so the
    table image fills its card instead of leaving the surrounding area
    looking empty. Scoped to the In-the-Wild section. */
-.section-wild .container { max-width: 1320px; }
+.section-wild .container { max-width: 1400px; }
 .section-wild .wild-grid { grid-template-columns: 1.75fr 1fr; }
 .section-wild .wild-table-block { padding: 18px; }
 .section-wild .wild-grid > .wild-table-block .table-image-wrap {
@@ -1624,7 +1802,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .us-percent { font-size: 24px; }
 .us-label {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-secondary);
   margin-top: 8px;
   line-height: 1.4;
@@ -1645,11 +1823,11 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-size: 20px;
 }
 .wild-userstudy-block .us-label {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .us-baseline-text {
-  font-size: 13px;
+  font-size: 14.5px;
   color: var(--text-muted);
   text-align: center;
   margin-top: 8px;
@@ -1663,6 +1841,9 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* ============================================
    ABLATION SECTION (Table 4 + Figure 8)
    ============================================ */
+/* Widen the Ablation section (default 1100px) to match the other paired
+   sections so Table 4 and Figure 8 render larger side by side. */
+.section-ablation .container { max-width: 1400px; }
 .ablation-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -1679,50 +1860,108 @@ section.has-light-bg { background: var(--bg-secondary); }
   border: 1px solid var(--border-light);
 }
 
-.ablation-quant-table {
-  font-size: 13px;
+/* Ablation table — light theme matching the SVG-rendered tables 1-3.
+   • White card (.table-image-wrap) hosting the HTML table
+   • Dark text on white, horizontal divider lines only (no row borders)
+   • ✓ / ✗ marks in the SVG colours (green / red) */
+.ablation-table-block .table-image-wrap {
+  /* Inside the dark .ablation-table-block, no extra shadow / margin */
+  margin: 0;
+  padding: 14px 18px;
+  box-shadow: none;
 }
+
+.ablation-quant-table.quant-table {
+  background: transparent;
+  color: #1f2328;
+  font-size: 14.5px;
+  min-width: 0;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
 .ablation-quant-table th,
 .ablation-quant-table td {
-  padding: 9px 10px;
+  padding: 8px 10px;
+  border-bottom: none;          /* override base quant-table row borders */
 }
 .ablation-quant-table thead th,
 .ablation-quant-table tbody td {
   text-align: center !important;
   vertical-align: middle;
 }
+
+/* Top + bottom rule (1.5 px) and a single divider under the header (1 px),
+   mirroring the SVG layout for tables 1-3. */
+.ablation-quant-table thead th {
+  background: transparent;
+  color: #0d1117;
+  font-size: 13.5px;
+  font-weight: 700;
+  border-top: 1.5px solid #1f2328;
+  border-bottom: 1px solid #1f2328;
+}
+.ablation-quant-table tbody tr:last-child th,
+.ablation-quant-table tbody tr:last-child td {
+  border-bottom: 1.5px solid #1f2328;
+}
+
 .ablation-quant-table tbody th {
   text-align: left;
-  font-weight: 600;
-  background: var(--bg-secondary);
-  padding-left: 14px;
-  color: var(--text-primary);
+  background: transparent;
+  color: #1f2328;
+  font-weight: 400;        /* matches SVG row labels — no font-weight attr */
+  padding-left: 12px;
 }
+
+/* Section divider between component rows (FreqMoLE / L_f) and metric rows,
+   mirroring the 0.8 px #bfc6cd group dividers used in tables 1-3. */
+.ablation-quant-table tbody tr.component-row + tr:not(.component-row) th,
+.ablation-quant-table tbody tr.component-row + tr:not(.component-row) td {
+  border-top: 0.8px solid #bfc6cd;
+}
+
+/* "Ours" column highlight — soft HRRI-tan tint that reads on white.
+   Cells stay regular weight; only <strong> values get bolded (pure black). */
 .ablation-quant-table .th-ours {
-  background: rgba(255, 183, 77, 0.20);
-  color: var(--color-accent);
+  background: rgba(222, 179, 123, 0.30);
+  color: #0d1117;                          /* same as other header cells */
   font-weight: 700;
-  border-bottom: 2px solid var(--color-accent);
+  border-bottom: 1px solid #1f2328;        /* matches header divider rule */
 }
 .ablation-quant-table .cell-ours {
-  background: rgba(255, 183, 77, 0.10);
-  font-weight: 600;
+  background: rgba(222, 179, 123, 0.14);
 }
-.ablation-quant-table .cell-ours strong {
-  color: var(--color-accent);
+.ablation-quant-table .cell-ours strong,
+.ablation-quant-table strong {
+  color: #000000;          /* matches SVG best-value pure black */
   font-weight: 700;
 }
+.ablation-quant-table u {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.45);
+}
+
+/* ✓ / ✗ marks — same colours as the SVG tables */
 .ablation-quant-table .component-row td,
 .ablation-quant-table .component-row th {
   font-size: 14px;
 }
+.ablation-quant-table .mark {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  font-family: inherit;     /* stay in Inter — not the browser symbol font */
+}
+.ablation-quant-table .mark--yes { color: #1a7f37; }   /* matches SVG green */
+.ablation-quant-table .mark--no  { color: #cf222e; }   /* matches SVG red */
 
 .ablation-figure-block {
   text-align: center;
 }
 .ablation-figure-block img {
   display: block;
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
   border-radius: 8px;
   border: 1px solid var(--border-light);
@@ -1742,7 +1981,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 .abstract-text {
   max-width: 800px;
   margin: 0 auto;
-  font-size: 15.5px;
+  font-size: 18px;
   line-height: 1.85;
   color: var(--text-secondary);
   text-align: justify;
@@ -1820,8 +2059,8 @@ section.has-light-bg { background: var(--bg-secondary); }
   transition: all 0.2s;
 }
 .footer-text a:hover {
-  color: var(--color-pose-light);
-  border-bottom-color: var(--color-pose);
+  color: var(--color-lab-light);
+  border-bottom-color: var(--color-lab-3);
 }
 
 /* ============================================
@@ -1831,9 +2070,9 @@ section.has-light-bg { background: var(--bg-secondary); }
   section.section { padding: 56px 0; }
   .hero { padding: 56px 0 40px; }
   .action-buttons { gap: 8px; }
-  .action-btn { padding: 9px 16px; font-size: 13px; }
+  .action-btn { padding: 9px 16px; font-size: 15px; }
   .us-value { font-size: 36px; }
   .us-percent { font-size: 20px; }
   .tldr-card { padding: 20px; }
-  .tldr-text { font-size: 15.5px; }
+  .tldr-text { font-size: 17px; }
 }
