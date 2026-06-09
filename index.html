@@ -25,7 +25,10 @@
   ]});"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-<link rel="stylesheet" href="static/css/style.css?v=26" />
+<!-- Image comparison slider (LRGI ⇄ Our result) -->
+<script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+<link rel="stylesheet" href="static/css/style.css?v=78" />
 </head>
 
 <body>
@@ -35,16 +38,12 @@
   <div class="hero-body">
     <div class="container has-text-centered">
 
-      <!-- <div class="venue-badge">
-        <span class="badge-dot"></span>
-        <span class="badge-text">NeurIPS 2026</span>
-      </div> -->
-
-      <h1 class="title-main">
-        <span class="tag-ref">Ref</span><span class="tag-gc">GC</span>-<span class="tag-sr">SR</span><span class="title-superscript tag-sr">2</span>
+      <h1 class="title-logo-h1" aria-label="RefGC-SR²: Reference-guided Super-Resolution and Refinement of AI Generated Content">
+        <img src="asset/logo_glossy1.png" alt="RefGC-SR²" class="title-logo" />
       </h1>
 
       <p class="subtitle-anim">
+        <span class="word w0"><span class="rgsr">RefGC-SR<sup>2</sup></span>:</span>
         <span class="word w1">Reference-guided</span>
         <span class="word w2">Super-Resolution</span>
         <span class="word w3">and</span>
@@ -112,213 +111,34 @@
   </div>
 </section>
 
-<!-- ====================== TEASER (Figure 1) ====================== -->
+<!-- ====================== FIGURE 1 (TEASER) ====================== -->
 <section class="section section-teaser">
   <div class="container">
 
     <div class="tldr-card">
       <span class="tldr-label">TL;DR</span>
-      <!-- <p class="tldr-text">
-        <strong>RefGC-SR<sup>2</sup></strong> is the first task that
-        <em>jointly super-resolves and refines</em> reference-guided AI-generated images (AIGC)
-        by <em>reusing the user-provided high-resolution reference image</em> (HRRI) at the post-processing stage,
-        supported by the first real-world triplet dataset and a frequency-aware DiT-based model.
-      </p> -->
       <p class="tldr-text">
-        We introduce <strong>RefGC-SR<sup>2</sup></strong>, a new task that <em>jointly upscales and refines</em> 
+        We introduce <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>, a new task that <em>jointly upscales and refines</em> 
         reference-guided generated content (AIGC) using the original high-resolution reference (HRRIs), 
         with the first real-world triplet dataset and a frequency-aware diffusion transformer model.
       </p>
     </div>
 
-    <!-- ============================================
-         SHOWCASE — RefGC-SR² applied to in-the-wild generator outputs
-         ============================================ -->
-    <div class="showcase" id="showcase">
-
-      <div class="showcase-flow" aria-label="RefGC-SR2 in-the-wild showcase">
-        <!-- ============================================================
-             Single-panel category carousel.
-             Prev/Next arrows cycle: Benchmark → Existing RefGC → Commercial.
-             ============================================================ -->
-        <div class="demo-carousel" aria-roledescription="carousel">
-
-          <!-- Category tabs: every option is shown at once; the active one
-               carries the action-button hover highlight. -->
-          <div class="carousel-tabs" role="tablist" aria-label="Showcase category">
-            <button class="carousel-tab is-active" type="button" role="tab" data-index="0" aria-selected="true">📊 RefGC-SR² Benchmark</button>
-            <button class="carousel-tab" type="button" role="tab" data-index="1" aria-selected="false">🎨 Existing RefGC Models</button>
-            <button class="carousel-tab" type="button" role="tab" data-index="2" aria-selected="false">🤖 Commercial Models</button>
-          </div>
-
-          <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Previous category">&lsaquo;</button>
-          <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Next category">&rsaquo;</button>
-
-          <div class="carousel-track">
-
-            <!-- Slide 1 ─ RefGC-SR² Benchmark -->
-            <article class="carousel-slide carousel-slide--bench is-active" data-index="0" aria-label="RefGC-SR² Benchmark">
-              <header class="demo-block-head">
-                <h4 class="demo-block-title">Results on our proposed benchmark dataset</h4>
-                <!-- <p class="demo-block-desc">
-                  LRGIs are synthesised by our <strong>DipRefGC</strong> from real-world HRRI–HRGT pairs;
-                  our model jointly upscales and refines them into 1024 × 1024 outputs.
-                </p> -->
-              </header>
-              <div class="demo-stage">
-                <figure class="demo-card demo-card--lrgi">
-                  <span class="demo-group-label">Input</span>
-                  <div class="demo-frame demo-frame--lr">
-                    <img src="asset/rabbit_LRGI.png" alt="Benchmark LRGI: low-resolution generated rabbit (256×256)" loading="lazy" />
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="demo-res">256 &times; 256</span></figcaption>
-                </figure>
-
-                <div class="demo-pipeline" aria-hidden="true">
-                  <div class="demo-flow-top">
-                    <span class="demo-flow-mark">New task</span>
-                    <span class="demo-flow-name">RefGC-SR<sup>2</sup> <span class="demo-flow-ours">(Ours)</span></span>
-                  </div>
-                  <div class="demo-arrow"></div>
-                  <div class="demo-flow-bottom">
-                    <span class="demo-flow-op"><span class="demo-flow-op-plus">+</span>Super-Resolution</span>
-                    <span class="demo-flow-op"><span class="demo-flow-op-plus">+</span>Refinement</span>
-                  </div>
-                </div>
-
-                <figure class="demo-card demo-card--out">
-                  <span class="demo-group-label">Output</span>
-                  <div class="demo-frame demo-frame--hr demo-frame--ours">
-                    <img src="asset/rabbit_output.png" alt="RefGC-SR² output: refined and super-resolved rabbit (1024×1024)" loading="lazy" />
-                    <span class="demo-ours-badge">Ours</span>
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--out">RefGC-SR<sup>2</sup></span><span class="demo-res">1024 &times; 1024</span></figcaption>
-                </figure>
-
-                <figure class="demo-card demo-card--hrri demo-card--ref">
-                  <span class="demo-group-label">Reference</span>
-                  <div class="demo-frame demo-frame--hr">
-                    <img src="asset/rabbit_HRRI.png" alt="Benchmark HRRI: high-resolution rabbit reference (1024×1024)" loading="lazy" />
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--hrri">HRRI</span><span class="demo-res">1024 &times; 1024</span></figcaption>
-                </figure>
-              </div>
-            </article>
-
-            <!-- Slide 2 ─ Existing RefGC Models -->
-            <article class="carousel-slide carousel-slide--refgc" data-index="1" aria-label="Existing RefGC Models" hidden>
-              <header class="demo-block-head">
-                <h4 class="demo-block-title">Results on existing reference-guided generation outputs</h4>
-                <!-- <p class="demo-block-desc">
-                  We feed the LRGI produced by existing RefGC research models (Nano Banana, FLUX-Kontext, IP-Adapter, …)
-                  into our model along with the user-provided HRRI, recovering high-resolution, artifact-free results.
-                </p> -->
-              </header>
-              <div class="demo-stage">
-                <figure class="demo-card demo-card--lrgi">
-                  <span class="demo-group-label">Input</span>
-                  <div class="demo-frame demo-frame--lr">
-                    <img src="static/images/placeholders/nano-lrgi.svg" alt="LRGI 256x256 from Nano Banana" loading="lazy" />
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--lrgi">LRGI · Nano Banana</span><span class="demo-res">256 &times; 256</span></figcaption>
-                </figure>
-
-                <div class="demo-pipeline" aria-hidden="true">
-                  <div class="demo-flow-top">
-                    <span class="demo-flow-mark">New task</span>
-                    <span class="demo-flow-name">RefGC-SR<sup>2</sup> <span class="demo-flow-ours">(Ours)</span></span>
-                  </div>
-                  <div class="demo-arrow"></div>
-                  <div class="demo-flow-bottom">
-                    <span class="demo-flow-op"><span class="demo-flow-op-plus">+</span>Super-Resolution</span>
-                    <span class="demo-flow-op"><span class="demo-flow-op-plus">+</span>Refinement</span>
-                  </div>
-                </div>
-
-                <figure class="demo-card demo-card--out">
-                  <span class="demo-group-label">Output</span>
-                  <div class="demo-frame demo-frame--hr demo-frame--ours">
-                    <img src="static/images/placeholders/nano-ours.svg" alt="RefGC-SR2 output 1024x1024" loading="lazy" />
-                    <span class="demo-ours-badge">Ours</span>
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--out">RefGC-SR<sup>2</sup></span><span class="demo-res">1024 &times; 1024</span></figcaption>
-                </figure>
-
-                <figure class="demo-card demo-card--hrri demo-card--ref">
-                  <span class="demo-group-label">Reference</span>
-                  <div class="demo-frame demo-frame--hr">
-                    <img src="static/images/placeholders/nano-hrri.svg" alt="HRRI 1024x1024 reference" loading="lazy" />
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--hrri">HRRI</span><span class="demo-res">1024 &times; 1024</span></figcaption>
-                </figure>
-              </div>
-            </article>
-
-            <!-- Slide 3 ─ Commercial Models -->
-            <article class="carousel-slide carousel-slide--comm" data-index="2" aria-label="Commercial Models" hidden>
-              <header class="demo-block-head">
-                <h4 class="demo-block-title">Refine + super-resolve outputs from production-grade chat-image models</h4>
-                <p class="demo-block-desc">
-                  We treat the image outputs of <strong>GPT-4o</strong>, <strong>Qwen</strong>, and <strong>Gemini</strong>
-                  as LRGI and feed them, together with the user-provided HRRI, into our model.
-                </p>
-              </header>
-              <div class="demo-stage">
-                <figure class="demo-card demo-card--lrgi">
-                  <span class="demo-group-label">Input</span>
-                  <div class="demo-frame demo-frame--lr">
-                    <img src="static/images/placeholders/gpt-lrgi.svg" alt="LRGI 256x256 from GPT-4o Image" loading="lazy" />
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--lrgi">LRGI · GPT-4o</span><span class="demo-res">256 &times; 256</span></figcaption>
-                </figure>
-
-                <div class="demo-pipeline" aria-hidden="true">
-                  <div class="demo-flow-top">
-                    <span class="demo-flow-mark">New task</span>
-                    <span class="demo-flow-name">RefGC-SR<sup>2</sup> <span class="demo-flow-ours">(Ours)</span></span>
-                  </div>
-                  <div class="demo-arrow"></div>
-                  <div class="demo-flow-bottom">
-                    <span class="demo-flow-op"><span class="demo-flow-op-plus">+</span>Super-Resolution</span>
-                    <span class="demo-flow-op"><span class="demo-flow-op-plus">+</span>Refinement</span>
-                  </div>
-                </div>
-
-                <figure class="demo-card demo-card--out">
-                  <span class="demo-group-label">Output</span>
-                  <div class="demo-frame demo-frame--hr demo-frame--ours">
-                    <img src="static/images/placeholders/gpt-ours.svg" alt="RefGC-SR2 output 1024x1024" loading="lazy" />
-                    <span class="demo-ours-badge">Ours</span>
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--out">RefGC-SR<sup>2</sup></span><span class="demo-res">1024 &times; 1024</span></figcaption>
-                </figure>
-
-                <figure class="demo-card demo-card--hrri demo-card--ref">
-                  <span class="demo-group-label">Reference</span>
-                  <div class="demo-frame demo-frame--hr">
-                    <img src="static/images/placeholders/gpt-hrri.svg" alt="HRRI 1024x1024 reference" loading="lazy" />
-                  </div>
-                  <figcaption><span class="demo-tag demo-tag--hrri">HRRI</span><span class="demo-res">1024 &times; 1024</span></figcaption>
-                </figure>
-              </div>
-            </article>
-          </div>
-
-          <div class="carousel-dots" role="tablist" aria-label="Category navigation">
-            <button class="carousel-dot is-active" type="button" data-index="0" aria-label="RefGC-SR² Benchmark"></button>
-            <button class="carousel-dot" type="button" data-index="1" aria-label="Existing RefGC Models"></button>
-            <button class="carousel-dot" type="button" data-index="2" aria-label="Commercial Models"></button>
-          </div>
-        </div>
-
-        <p class="showcase-note">
-          Our model takes a <strong>256 &times; 256 LRGI</strong> together with the user-provided
-          <strong>1024 &times; 1024 HRRI</strong> and jointly performs <em>&times;4 super-resolution</em>
-          and <em>generative-artifact refinement</em> to produce the final <strong>1024 &times; 1024</strong> result.
-        </p>
-      </div>
+    <!-- Figure 1 -->
+    <div class="teaser-container">
+      <img src="static/images/teaser.png?v=2" alt="RefGC-SR² teaser" class="teaser-image" />
+      <p class="figure-caption">
+        <strong>Figure 1.</strong> Reference-guided Generated Content Super-Resolution-Refinement (<span class="rgsr">RefGC-SR<sup>2</sup></span>).
+        Existing reference-guided generation pipelines first produce a low-resolution generated image (LRGI) from a
+        high-resolution reference image (HRRI), but the output often suffers from four common generative artifacts:
+        <span class="artifact-tag a1">(a) identity distortion</span>,
+        <span class="artifact-tag a2">(b) detail inconsistency</span>,
+        <span class="artifact-tag a3">(c) texture loss</span>, and
+        <span class="artifact-tag a4">(d) overall quality degradation</span>.
+        We introduce <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>, a post-processing task that takes the LRGI and the HRRI as inputs,
+        and produces a high-resolution, artifact-refined output.
+      </p>
     </div>
-    <!-- /showcase -->
   </div>
 </section>
 
@@ -338,34 +158,433 @@
         (RefSR) methods recover resolution but assume natural-image degradations and ignore the
         artifact distribution of generative pipelines. To address both gaps in a single formulation,
         we introduce a new task: <strong>reference-guided generated content
-        super-resolution-refinement (RefGC-SR<sup>2</sup>)</strong>, where the original HRRI is reused at the
+        super-resolution-refinement (<span class="rgsr">RefGC-SR<sup>2</sup></span>)</strong>, where the original HRRI is reused at the
         post-processing stage to recover lost details, refine generative artifacts, and upscale
-        the output simultaneously. We construct the first real-world triplet data generation pipeline for this RefGC-SR<sup>2</sup>
+        the output simultaneously. We construct the first real-world triplet data generation pipeline for this <span class="rgsr">RefGC-SR<sup>2</sup></span>
         task, training a diptych-conditioned generator to synthesize paired low-quality anchors
         that public pretrained models cannot provide. We further present a frequency-aware
-        diffusion transformer model for RefGC-SR<sup>2</sup> that selectively injects fine details from the
+        diffusion transformer model for <span class="rgsr">RefGC-SR<sup>2</sup></span> that selectively injects fine details from the
         HRRI while removing generative artifacts. Extensive experiments demonstrate that our
-        RefGC-SR<sup>2</sup> model successfully (i) refines the object identity faithfully with respect to the
+        <span class="rgsr">RefGC-SR<sup>2</sup></span> model successfully (i) refines the object identity faithfully with respect to the
         reference, and (ii) recovers high-resolution details, so that the final result is significantly
         higher quality and practically more usable compared to existing RefGCR and RefSR baselines.
       </p>
     </div>
+  </div>
+</section>
 
-    <!-- Figure 1 -->
-    <div class="teaser-container">
-      <img src="static/images/teaser.png" alt="RefGC-SR² teaser" class="teaser-image" />
-      <p class="figure-caption">
-        <strong>Figure 1.</strong> Reference-guided Generated Content Super-Resolution-Refinement (RefGC-SR<sup>2</sup>).
-        Existing reference-guided generation pipelines first produce a low-resolution generated image (LRGI) from a
-        high-resolution reference image (HRRI), but the output often suffers from four common generative artifacts:
-        <span class="artifact-tag a1">(a) identity distortion</span>,
-        <span class="artifact-tag a2">(b) detail inconsistency</span>,
-        <span class="artifact-tag a3">(c) texture loss</span>, and
-        <span class="artifact-tag a4">(d) overall quality degradation</span>.
-        We introduce <strong>RefGC-SR<sup>2</sup></strong>, a post-processing task that takes the LRGI and the HRRI as inputs,
-        and produces a high-resolution, artifact-refined output.
-      </p>
+<!-- ====================== SHOWCASE ====================== -->
+<section class="section section-showcase">
+  <div class="container">
+
+    <div class="showcase" id="showcase">
+
+      <div class="showcase-flow" aria-label="RefGC-SR2 example gallery">
+
+        <!-- ============================================================
+             Single-panel category carousel.
+             Prev/Next arrows cycle: Benchmark → In the wild.
+             ============================================================ -->
+        <div class="demo-carousel" aria-roledescription="carousel">
+
+          <!-- Top-level category buttons -->
+          <div class="carousel-cats" role="tablist" aria-label="Showcase category">
+            <button class="carousel-cat is-active" type="button" role="tab" data-cat="bench" aria-selected="true">📊 RefGC-SR² Benchmark</button>
+            <button class="carousel-cat" type="button" role="tab" data-cat="wild" aria-selected="false">🌍 In the wild</button>
+          </div>
+
+          <!-- Category description — only one shows at a time (per category). -->
+          <header class="demo-block-head is-active" data-cat="bench">
+            <p class="demo-block-desc">
+              The original <strong>HRRI</strong> is reused at the post-processing stage to
+              <em>refine generative artifacts</em>, and <em>upscale the output</em>.
+            </p>
+          </header>
+          <header class="demo-block-head" data-cat="wild">
+            <p class="demo-block-desc">
+              <strong style="color: var(--color-LRGI)">RefGC</strong> outputs from Gemini, ChatGPT, and Qwen-Image,
+              refined and upscaled by <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>.
+            </p>
+          </header>
+
+
+          <!-- Scene sub-buttons (labels swap per category via JS) -->
+          <div class="carousel-tabs" role="tablist" aria-label="Showcase scene">
+            <button class="carousel-tab is-active" type="button" role="tab" data-scene="0" aria-selected="true">Sample 1</button>
+            <button class="carousel-tab" type="button" role="tab" data-scene="1" aria-selected="false">Sample 2</button>
+            <button class="carousel-tab" type="button" role="tab" data-scene="2" aria-selected="false">Sample 3</button>
+            <button class="carousel-tab" type="button" role="tab" data-scene="3" aria-selected="false">Sample 4</button>
+          </div>
+
+          <button class="carousel-arrow carousel-arrow--prev" type="button" aria-label="Previous scene">&lsaquo;</button>
+          <button class="carousel-arrow carousel-arrow--next" type="button" aria-label="Next scene">&rsaquo;</button>
+
+          <div class="carousel-track">
+
+            <!-- bench · scene 0 · Benchmark — Sample 1 -->
+            <article class="carousel-slide carousel-slide--bench is-active" data-cat="bench" data-scene="0" aria-label="Benchmark — Sample 1">
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/doll_HRRI.png" alt="HRRI 1024x1024 reference — Sample 1" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/doll_LRGI.png" alt="LRGI 256x256 input — Sample 1" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/doll_output.png" alt="RefGC-SR2 result 1024x1024 — Sample 1" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+
+            <!-- bench · scene 1 · Benchmark — Sample 2 -->
+            <article class="carousel-slide carousel-slide--bench" data-cat="bench" data-scene="1" aria-label="Benchmark — Sample 2" hidden>
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/jar_HRRI.png" alt="HRRI 1024x1024 reference — Sample 2" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/jar_LRGI.png" alt="LRGI 256x256 input — Sample 2" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/jar_output.png" alt="RefGC-SR2 result 1024x1024 — Sample 2" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+
+            <!-- bench · scene 2 · Benchmark — Sample 3 -->
+            <article class="carousel-slide carousel-slide--bench" data-cat="bench" data-scene="2" aria-label="Benchmark — Sample 3" hidden>
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/rabbit_HRRI.png" alt="HRRI 1024x1024 reference — Sample 3" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/rabbit_LRGI.png" alt="LRGI 256x256 input — Sample 3" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/rabbit_output.png" alt="RefGC-SR2 result 1024x1024 — Sample 3" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+
+            <!-- bench · scene 3 · Benchmark — Sample 4 -->
+            <article class="carousel-slide carousel-slide--bench" data-cat="bench" data-scene="3" aria-label="Benchmark — Sample 4" hidden>
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/camera_HRRI.png" alt="HRRI 1024x1024 reference — Sample 4" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/camera_LRGI.png" alt="LRGI 256x256 input — Sample 4" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/camera_output.png" alt="RefGC-SR2 result 1024x1024 — Sample 4" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+
+            <!-- wild · scene 0 · In the wild — Gemini -->
+            <article class="carousel-slide carousel-slide--refgc" data-cat="wild" data-scene="0" aria-label="In the wild — Gemini" hidden>
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/gemini_HRRI.jpg" alt="HRRI 1024x1024 reference — Gemini" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/gemini_LRGI.png" alt="LRGI 256x256 input — Gemini" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/gemini_output.png" alt="RefGC-SR2 result 1024x1024 — Gemini" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+
+            <!-- wild · scene 1 · In the wild — ChatGPT -->
+            <article class="carousel-slide carousel-slide--refgc" data-cat="wild" data-scene="1" aria-label="In the wild — ChatGPT" hidden>
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/chatgpt_HRRI.jpg" alt="HRRI 1024x1024 reference — ChatGPT" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/chatgpt_LRGI.png" alt="LRGI 256x256 input — ChatGPT" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/chatgpt_output.png" alt="RefGC-SR2 result 1024x1024 — ChatGPT" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+
+            <!-- wild · scene 2 · In the wild — Qwen-Image -->
+            <article class="carousel-slide carousel-slide--refgc" data-cat="wild" data-scene="2" aria-label="In the wild — Qwen-Image" hidden>
+              <div class="demo-stage demo-stage--cmp">
+
+                <!-- Reference (HRRI) -->
+                <figure class="demo-card demo-card--hrri demo-card--ref">
+                  <span class="demo-group-label">Reference</span>
+                  <div class="demo-frame demo-frame--hr">
+                    <img src="asset/qwen_HRRI.jpg" alt="HRRI 1024x1024 reference — Qwen-Image" loading="lazy" />
+                    <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--hrri">HRRI</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                  </div>
+                  <p class="demo-reuse-note">Reused twice for the first RefGC and our model</p>
+                </figure>
+
+                <!-- Reuse connector: HRRI →(RefGC) 1st-gen LRGI, and HRRI reused → our result.
+                     The reuse arrow extends/glows in real time as the slider reveals the result. -->
+                <div class="demo-link" aria-hidden="true">
+                  <div class="demo-link-row demo-link-row--refgc">
+                    <span class="demo-link-label">RefGC<small>HRRI &rarr; LRGI &middot; 1st generation</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                  <div class="demo-link-row demo-link-row--reuse">
+                    <span class="demo-link-label">RefGC-SR<sup>2</sup> (Ours)<small>reuse HRRI &middot; refine + upscale</small></span>
+                    <span class="demo-link-arrow"><span class="demo-link-shaft"></span><span class="demo-link-head"></span></span>
+                  </div>
+                </div>
+
+                <!-- Comparison slider: LRGI (input) ⇄ Our refined result -->
+                <figure class="demo-card demo-card--cmp">
+                  <span class="demo-group-label">Input → Our result</span>
+                  <div class="demo-frame demo-frame--cmp">
+                    <img-comparison-slider class="demo-slider" value="84" tabindex="0" aria-label="Drag to compare the low-res input against our result">
+                      <figure slot="first" class="cmp-fig cmp-before">
+                        <img src="asset/qwen_LRGI.png" alt="LRGI 256x256 input — Qwen-Image" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tl"><span class="demo-tag demo-tag--lrgi">LRGI</span><span class="img-cap-res">256&times;256</span></figcaption>
+                      </figure>
+                      <figure slot="second" class="cmp-fig cmp-after">
+                        <img src="asset/qwen_output.png" alt="RefGC-SR2 result 1024x1024 — Qwen-Image" loading="lazy" />
+                        <figcaption class="img-cap img-cap--tr"><span class="demo-tag demo-tag--out">Ours</span><span class="img-cap-res">1024&times;1024</span></figcaption>
+                      </figure>
+                    </img-comparison-slider>
+                  </div>
+                  <p class="demo-cmp-hint" aria-hidden="true"></p>
+                </figure>
+
+              </div>
+            </article>
+          </div>
+
+          <!-- What our model repairs — crossfades artifact → strength with the slider -->
+          <!-- The four generative artifacts — struck through (solved) as our result is revealed -->
+          <div class="fix-strip" aria-label="Generative artifacts solved by our model">
+            <p class="fix-strip-lead">
+              Drag to reveal our <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong> result &mdash; the
+              <strong style="color: var(--color-LRGI)">LRGI</strong>&rsquo;s four generative artifacts get <em>solved</em>:
+            </p>
+            <ul class="fix-list">
+              <li class="fix-item"><span class="artifact-tag a1">(a) identity distortion</span><span class="fix-solved" aria-hidden="true">✓</span></li>
+              <li class="fix-item"><span class="artifact-tag a2">(b) detail inconsistency</span><span class="fix-solved" aria-hidden="true">✓</span></li>
+              <li class="fix-item"><span class="artifact-tag a3">(c) texture loss</span><span class="fix-solved" aria-hidden="true">✓</span></li>
+              <li class="fix-item"><span class="artifact-tag a4">(d) overall quality degradation</span><span class="fix-solved" aria-hidden="true">✓</span></li>
+            </ul>
+          </div>
+
+          <div class="carousel-dots" role="tablist" aria-label="Scene navigation">
+            <button class="carousel-dot is-active" type="button" data-scene="0" aria-label="Scene 1"></button>
+            <button class="carousel-dot" type="button" data-scene="1" aria-label="Scene 2"></button>
+            <button class="carousel-dot" type="button" data-scene="2" aria-label="Scene 3"></button>
+            <button class="carousel-dot" type="button" data-scene="3" aria-label="Scene 4"></button>
+          </div>
+          <!-- What our model repairs — the four Figure-1 generative artifacts -->
+        </div>
+
+      </div>
     </div>
+    <!-- /showcase -->
   </div>
 </section>
 
@@ -379,7 +598,7 @@
         <div class="contrib-num">01</div>
         <h3 class="contrib-title">New Task</h3>
         <p class="contrib-text">
-          We formulate <strong>RefGC-SR<sup>2</sup></strong>, the first post-processing task that reuses
+          We formulate <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>, the first post-processing task that reuses
           the user-provided HRRI as a recovery source to <em>jointly upscale and refine</em> reference-guided generations.
         </p>
       </div>
@@ -388,7 +607,7 @@
         <div class="contrib-num">02</div>
         <h3 class="contrib-title">New Dataset</h3>
         <p class="contrib-text">
-          We construct <strong>RefGC-SR<sup>2</sup> Dataset</strong>, the first real-world
+          We construct <strong><span class="rgsr">RefGC-SR<sup>2</sup></span> Dataset</strong>, the first real-world
           HRRI–HRGT-LRGI triplet dataset, built via our diptych-conditioned generator <strong>DipRefGC</strong>
           that produces pose-aligned realistic generative artifacts.
         </p>
@@ -398,7 +617,7 @@
         <div class="contrib-num">03</div>
         <h3 class="contrib-title">New Model</h3>
         <p class="contrib-text">
-          We propose the first <strong>RefGC-SR<sup>2</sup>-targeted model</strong> with
+          We propose the first <strong><span class="rgsr">RefGC-SR<sup>2</sup></span> model</strong> with
           <em>frequency-aware</em> modules (FreqMoLE + frequency-based loss) injected into a frozen
           FLUX-Kontext backbone to remove artifacts while increasing resolution.
         </p>
@@ -413,7 +632,7 @@
   <div class="container">
     <h2 class="section-title">Positioning Our Task</h2>
     <!-- <p class="section-lead">
-      <strong>RefGC-SR<sup>2</sup></strong> is the first task that jointly satisfies all four criteria:
+      <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong> is the first task that jointly satisfies all four criteria:
       a <em>generated content (GC)</em> input, a <em>high-resolution reference image (HRRI)</em> input,
       <em>super-resolution</em>, and <em>artifact refinement</em>.
     </p> -->
@@ -427,16 +646,15 @@
         </div>
         <p class="table-caption" style="text-align:left;">
           <strong>Table 1.</strong> Comparison of related image enhancement tasks.
-          RefGC-SR<sup>2</sup> is the first task that jointly satisfies all four criteria.
+          <span class="rgsr">RefGC-SR<sup>2</sup></span> is the first task that jointly satisfies all four criteria.
         </p>
       </div>
 
       <!-- Tasks figure -->
       <div class="wild-userstudy-block">
-        <img src="static/images/tasks.png" alt="Task comparison illustration" class="positioning-figure" />
+        <img src="static/images/tasks.png?v=3" alt="Task comparison illustration" class="positioning-figure" />
         <p class="figure-caption" style="text-align:left;">
-          <strong>Task taxonomy.</strong> Figure of related image enhancement tasks and how our RefGC-SR<sup>2</sup>
-          setting differs from them.
+          <strong>Figure 9.</strong> Visual taxonomy of related image enhancement tasks.
         </p>
       </div>
 
@@ -454,13 +672,13 @@
     </p>
 
     <!-- Figure 2: dataset pipeline -->
-    <div class="method-figure">
+    <div class="method-figure dataset-figure">
       <img src="static/images/dataset_pipeline.png?v=2" alt="Dataset construction pipeline" />
       <p class="figure-caption">
-        <strong>Figure 2.</strong> Construction pipeline of our RefGC-SR<sup>2</sup> Dataset.
+        <strong>Figure 2.</strong> Construction pipeline of our <span class="rgsr">RefGC-SR<sup>2</sup></span> Dataset.
         Stage 1 curates real-world HRRI-HRGT pairs from object-centric multi-view videos through VLM-based filtering, masking, and human validation. 
         Stage 2 synthesizes the corresponding LRGI with DipRefGC, which combines HRRI appearance with HRGT-derived pose conditions using Inpainting and Canny ControlNets. 
-        This produces pose-consistent, generative artifact-containing LRGIs paired with HRRI and HRGT, enabling supervised training for RefGC-SR<sup>2</sup>.
+        This produces pose-consistent, generative artifact-containing LRGIs paired with HRRI and HRGT, enabling supervised training for <span class="rgsr">RefGC-SR<sup>2</sup></span>.
       </p>
     </div>
 
@@ -483,7 +701,7 @@
     <div class="method-figure triplet-figure">
       <img src="static/images/triplet_examples.png" alt="Triplet examples" />
       <p class="figure-caption">
-        <strong>Figure 3.</strong> RefGC-SR<sup>2</sup> triplet examples with LRGI, HRRI, and HRGT.
+        <strong>Figure 3.</strong> <span class="rgsr">RefGC-SR<sup>2</sup></span> triplet examples with LRGI, HRRI, and HRGT.
       </p>
     </div>
   </div>
@@ -492,9 +710,9 @@
 <!-- ====================== MODEL (Figure 4 + Figure 5) ====================== -->
 <section class="section section-model has-light-bg">
   <div class="container">
-    <h2 class="section-title">Model: Frequency-Aware DiT for RefGC-SR<sup>2</sup></h2>
+    <h2 class="section-title">Model: Frequency-Aware DiT for <span class="rgsr">RefGC-SR<sup>2</sup></span></h2>
     <p class="section-lead">
-      Our RefGC-SR<sup>2</sup> Model freezes a FLUX-Kontext backbone and injects
+      Our <span class="rgsr">RefGC-SR<sup>2</sup></span> Model freezes a FLUX-Kontext backbone and injects
       <strong>FreqMoLE</strong> (Frequency-adaptive Mixture of LoRA Experts) into every DiT block,
       supervised by a <strong>frequency-based loss</strong> that aligns low frequencies with HRGT and
       high frequencies with HRRI.
@@ -575,17 +793,17 @@
   <div class="container">
     <h2 class="section-title">Results</h2>
     <p class="section-lead">
-      Our RefGC-SR<sup>2</sup> model achieves SOTA across SR, RefSR, and RefGCR baselines.
+      Our <span class="rgsr">RefGC-SR<sup>2</sup></span> model achieves SOTA across SR, RefSR, and RefGCR baselines.
     </p>
 
     <!-- Table 2: Main quantitative (image) -->
     <div class="quant-block">
-      <!-- <h3 class="sub-title">Table 2. Quantitative Comparison on RefGC-SR<sup>2</sup> Benchmark</h3> -->
+      <!-- <h3 class="sub-title">Table 2. Quantitative Comparison on <span class="rgsr">RefGC-SR<sup>2</sup></span> Benchmark</h3> -->
       <div class="table-image-wrap">
         <img src="static/images/table_2.svg?v=2" alt="Table 2: Quantitative Comparison on RefGC-SR² Benchmark" class="table-image" />
       </div>
       <p class="table-caption">
-        <strong>Table 2.</strong> Quantitative comparison on RefGC-SR<sup>2</sup>. The best and second-best results are highlighted in
+        <strong>Table 2.</strong> Quantitative comparison on <span class="rgsr">RefGC-SR<sup>2</sup></span>. The best and second-best results are highlighted in
         <strong>bold</strong> and <u>underline</u>, respectively. The Reference column indicates whether
         the model uses an additional HRRI. Asterisk (*) denotes that the model has been finetuned on our dataset.
       </p>
@@ -596,10 +814,10 @@
       <!-- <h3 class="sub-title">Figure 6. Qualitative Comparison</h3> -->
       <img src="static/images/qualitative.png" alt="Qualitative comparison" />
       <p class="figure-caption">
-        <strong>Figure 6.</strong> Qualitative comparison between our RefGC-SR<sup>2</sup> model and other models.
-        (a) shows qualitative results on the RefGC-SR<sup>2</sup> Benchmark, while (b) and (c) present
+        <strong>Figure 6.</strong> Qualitative comparison between our <span class="rgsr">RefGC-SR<sup>2</sup></span> model and other models.
+        (a) shows qualitative results on the <span class="rgsr">RefGC-SR<sup>2</sup></span> Benchmark, while (b) and (c) present
         results in the in-the-wild benchmark. Colored arrows mark failure cases of competing methods
-        (see legend), and blue arrows indicate our results. Our RefGC-SR<sup>2</sup> model better preserves
+        (see legend), and blue arrows indicate our results. Our <span class="rgsr">RefGC-SR<sup>2</sup></span> model better preserves
         fine details from HRRI and achieves high-quality upscaling compared to competing methods.
       </p>
     </div>
@@ -623,7 +841,7 @@
         <div class="table-image-wrap">
           <img src="static/images/table_3.svg?v=2" alt="Table 3: In-the-Wild Quantitative Results" class="table-image" />
         </div>
-        <p class="table-caption" style="text-align:left;">
+        <p class="table-caption">
           <strong>Table 3.</strong> In-the-wild evaluation, where outputs from compositing and customization models are treated as
           LRGI given HRRI and HRGT. <strong>Compositing</strong> denotes results using outputs from
           compositing models as LRGI, and <strong>Customization</strong> denotes results using outputs from
@@ -637,7 +855,7 @@
         <img src="static/images/user_study_main.png" alt="User study results" class="userstudy-figure" />
         <p class="figure-caption" style="text-align:left;">
           <strong>Figure 7.</strong> Top-rank-1 user study results. The user study is conducted with 16 participants comparing one
-          model from each SR, RefSR and RefGCR task and RefGC-SR<sup>2</sup> (Ours).
+          model from each SR, RefSR and RefGCR task and <span class="rgsr">RefGC-SR<sup>2</sup></span> (Ours).
         </p>
 
         <div class="userstudy-grid">
@@ -663,104 +881,6 @@
   </div>
 </section>
 
-<!-- ====================== ABLATION (Table 4 + Figure 8) ====================== -->
-<section class="section section-ablation">
-  <div class="container">
-    <h2 class="section-title">Ablation Study</h2>
-    <p class="section-lead">
-      Both <strong>FreqMoLE</strong> and the <strong>frequency-based loss <em>$\mathcal{L}_f$</em></strong>
-      contribute to the final result. Combining them yields the best score across every metric.
-    </p>
-
-    <div class="ablation-grid">
-
-      <!-- Table 4 -->
-      <div class="ablation-table-block">
-        <div class="table-image-wrap">
-          <table class="quant-table ablation-quant-table">
-            <thead>
-              <tr>
-                <th>Setting</th>
-                <th>(a)</th>
-                <th>(b)</th>
-                <th>(c)</th>
-                <th class="th-ours">(d) Ours</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="component-row">
-                <th>FreqMoLE</th>
-                <td><span class="mark mark--no">&#10007;</span></td>
-                <td><span class="mark mark--no">&#10007;</span></td>
-                <td><span class="mark mark--yes">&#10003;</span></td>
-                <td class="cell-ours"><span class="mark mark--yes">&#10003;</span></td>
-              </tr>
-              <tr class="component-row">
-                <th>$\mathcal{L}_f$</th>
-                <td><span class="mark mark--no">&#10007;</span></td>
-                <td><span class="mark mark--yes">&#10003;</span></td>
-                <td><span class="mark mark--no">&#10007;</span></td>
-                <td class="cell-ours"><span class="mark mark--yes">&#10003;</span></td>
-              </tr>
-              <tr>
-                <th>CLIP-I &uarr;</th>
-                <td>0.8437</td>
-                <td>0.8654</td>
-                <td><u>0.8673</u></td>
-                <td class="cell-ours"><strong>0.8696</strong></td>
-              </tr>
-              <tr>
-                <th>DINO &uarr;</th>
-                <td>0.6870</td>
-                <td><u>0.7386</u></td>
-                <td>0.7317</td>
-                <td class="cell-ours"><strong>0.7474</strong></td>
-              </tr>
-              <tr>
-                <th>PSNR &uarr;</th>
-                <td>16.3956</td>
-                <td>17.1981</td>
-                <td><u>17.3893</u></td>
-                <td class="cell-ours"><strong>17.5148</strong></td>
-              </tr>
-              <tr>
-                <th>SSIM &uarr;</th>
-                <td>0.6068</td>
-                <td><u>0.6221</u></td>
-                <td><u>0.6221</u></td>
-                <td class="cell-ours"><strong>0.6335</strong></td>
-              </tr>
-              <tr>
-                <th>LPIPS &darr;</th>
-                <td>0.3538</td>
-                <td><u>0.2835</u></td>
-                <td>0.2896</td>
-                <td class="cell-ours"><strong>0.2746</strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-caption" style="text-align:left;">
-          <strong>Table 4.</strong> Ablation of the proposed components on the RefGC-SR<sup>2</sup> Benchmark.
-          The best and second-best results are highlighted in <strong>bold</strong> and <u>underline</u>, respectively.
-        </p>
-      </div>
-
-      <!-- Figure 8 -->
-      <div class="ablation-figure-block">
-        <img src="static/images/ablation_qual.png" alt="Qualitative ablation results" />
-        <p class="figure-caption">
-          <strong>Figure 8.</strong> Qualitative ablation results of the proposed components.
-          Adding $\mathcal{L}_f$ brings back HRRI-faithful detail while preserving HRGT structure, and
-          <strong>FreqMoLE</strong> further restores fine-grained material properties
-          (e.g., the cup's transparency &mdash; red arrows) that the baseline misses.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ====================== BIBTEX ====================== -->
 <section class="section section-bibtex" id="bibtex">
   <div class="container">
@@ -778,16 +898,13 @@
 <!-- ====================== FOOTER ====================== -->
 <footer class="footer">
   <div class="container has-text-centered">
-    <p class="footer-text">
-      Project page template inspired by
-      <a href="https://nerfies.github.io/" target="_blank">Nerfies</a>,
-      <a href="https://genprop.github.io/" target="_blank">GenProp</a>, and
-      <a href="https://www.anjiecheng.me/sr3d" target="_blank">SR-3D</a>.
-      Source code released under CC BY-SA 4.0.
+    <!-- Visitor map badge (MapMyVisitors) — world map with live "Total Pageviews" count. -->
+    <p class="footer-visitors">
+      <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=5ak_kKNOBdWcT3TPhFaIyZDN6GFXRqPQe9TZ3v2hy2k&cl=ffffff&w=a"></script>
     </p>
   </div>
 </footer>
 
-<script src="static/js/main.js?v=2"></script>
+<script src="static/js/main.js?v=9"></script>
 </body>
 </html>
