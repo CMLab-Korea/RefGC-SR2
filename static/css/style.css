@@ -239,12 +239,13 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* Inline "RefGC-SR²" mentions in the body reuse the main-title gradient
    (Ref tan → GC lavender → SR² blue), so the term reads consistently. */
 .rgsr {
+  /* matches the logo text: orange (Ref) → magenta (GC) → blue (SR²) */
   background: linear-gradient(90deg,
-    #EF9F3E 0%,
-    #C68181 25%,
-    #9E63C5 52%,
-    #7579D1 78%,
-    #4C90DE 100%);
+    #F6A02E 0%,
+    #F17D6E 20%,
+    #ED5BAE 44%,
+    #957BCB 72%,
+    #3D9BE8 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -305,7 +306,8 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-size: clamp(1.08rem, 1.95vw, 1.42rem);
   font-weight: 400;
   color: var(--text-secondary);
-  margin: 0 0 20.25px 0;
+  /* pull up to absorb the logo PNG's transparent bottom padding */
+  margin: clamp(-4rem, -5vw, -1.25rem) 0 20.25px 0;
   letter-spacing: -0.01em;
 }
 .subtitle-anim .word {
