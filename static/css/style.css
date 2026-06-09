@@ -159,7 +159,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-logo {
   display: block;
-  width: clamp(160px, 25vw, 290px);
+  width: clamp(210px, 32vw, 400px);
   height: auto;
   margin: 0;
   filter: drop-shadow(0 6px 16.5px rgba(0, 0, 0, 0.55));
@@ -303,11 +303,11 @@ section.has-light-bg { background: var(--bg-secondary); }
 
 /* Animated subtitle with paper colors */
 .subtitle-anim {
-  font-size: clamp(1.08rem, 1.95vw, 1.42rem);
+  font-size: clamp(1.4rem, 2.6vw, 2.05rem);
   font-weight: 400;
   color: var(--text-secondary);
   /* pull up to absorb the logo PNG's transparent bottom padding */
-  margin: clamp(-4rem, -5vw, -1.25rem) 0 20.25px 0;
+  margin: clamp(-5.5rem, -7vw, -1.5rem) 0 20.25px 0;
   letter-spacing: -0.01em;
 }
 .subtitle-anim .word {
