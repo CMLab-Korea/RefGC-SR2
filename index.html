@@ -28,7 +28,7 @@
 <!-- Image comparison slider (LRGI ⇄ Our result) -->
 <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
-<link rel="stylesheet" href="static/css/style.css?v=81" />
+<link rel="stylesheet" href="static/css/style.css?v=84" />
 </head>
 
 <body>
@@ -39,11 +39,11 @@
     <div class="container has-text-centered">
 
       <h1 class="title-logo-h1" aria-label="RefGC-SR²: Reference-guided Super-Resolution and Refinement of AI Generated Content">
-        <img src="asset/logo_glossy1.png" alt="RefGC-SR²" class="title-logo" />
+        <img src="asset/logo_final.png" alt="RefGC-SR²" class="title-logo" />
       </h1>
 
       <p class="subtitle-anim">
-        <span class="word w0"><span class="rgsr">RefGC-SR<sup>2</sup></span>:</span>
+        <span class="word w0"><span class="rgsr">RefGC-<span class="glitch-sr">SR<sup>2</sup></span></span>:</span>
         <span class="word w1">Reference-guided</span>
         <span class="word w2">Super-Resolution</span>
         <span class="word w3">and</span>
@@ -196,13 +196,13 @@
           <!-- Category description — only one shows at a time (per category). -->
           <header class="demo-block-head is-active" data-cat="bench">
             <p class="demo-block-desc">
-              The original <strong>HRRI</strong> is reused at the post-processing stage to
+              The original HRRI is reused at the post-processing stage to
               <em>refine generative artifacts</em>, and <em>upscale the output</em>.
             </p>
           </header>
           <header class="demo-block-head" data-cat="wild">
             <p class="demo-block-desc">
-              <strong style="color: var(--color-LRGI)">RefGC</strong> outputs from Gemini, ChatGPT, and Qwen-Image,
+              <strong">RefGC</strong> outputs from Gemini, ChatGPT, and Qwen-Image,
               refined and upscaled by <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>.
             </p>
           </header>

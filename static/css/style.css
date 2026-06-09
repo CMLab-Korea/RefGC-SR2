@@ -159,7 +159,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-logo {
   display: block;
-  width: clamp(210px, 32vw, 400px);
+  width: clamp(240px, 38vw, 480px);
   height: auto;
   margin: 0;
   filter: drop-shadow(0 6px 16.5px rgba(0, 0, 0, 0.55));
@@ -239,21 +239,45 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* Inline "RefGC-SR²" mentions in the body reuse the main-title gradient
    (Ref tan → GC lavender → SR² blue), so the term reads consistently. */
 .rgsr {
-  /* matches the logo text: orange (Ref) → magenta (GC) → blue (SR²) */
-  background: linear-gradient(90deg,
-    #F6A02E 0%,
-    #F17D6E 20%,
-    #ED5BAE 44%,
-    #957BCB 72%,
-    #3D9BE8 100%);
+  /* Glossy text matching logo_final: horizontal hue (orange→hot-pink→blue) with a
+     vertical sheen highlight on top + a soft drop-shadow for a 3D glossy feel. */
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.12) 38%,
+      rgba(255, 255, 255, 0) 52%,
+      rgba(0, 0, 0, 0.14) 100%),
+    linear-gradient(90deg,
+      #F7A22E 0%,
+      #F37D6B 20%,
+      #F058A8 44%,
+      #987CC9 72%,
+      #41A0EA 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.28));
+}
+.rgsr sup {
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+/* TV-static glitch on the "SR²" of the title prefix only. As an inline-block it
+   leaves the parent gradient clip, so give it its own solid blue (logo SR²). */
+.glitch-sr,
+.glitch-sr sup {
+  /* glossy vertical blue (light top → base → deep bottom) like the logo SR² */
+  background: linear-gradient(180deg, #9FD2F7 0%, #41A0EA 52%, #2C82D2 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-.rgsr sup {
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.glitch-sr {
+  display: inline-block;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.28));
+  animation: sr-glitch 3.6s steps(1, end) infinite;
 }
 
 /* GC: no animation */
@@ -307,7 +331,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-weight: 400;
   color: var(--text-secondary);
   /* pull up to absorb the logo PNG's transparent bottom padding */
-  margin: clamp(-5.5rem, -7vw, -1.5rem) 0 20.25px 0;
+  margin: clamp(-6.5rem, -8.5vw, -2rem) 0 20.25px 0;
   letter-spacing: -0.01em;
 }
 .subtitle-anim .word {
@@ -2784,8 +2808,8 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* MapMyVisitors map.js badge (world map + "Total Pageviews" count). The widget
    scales to its container's width, so size it by changing the width below. */
 .footer-visitors {
-  width: 200px;
-  max-width: 200px;
+  width: 300px;
+  max-width: 300px;
   margin: 1.5rem auto 0;
 }
 
