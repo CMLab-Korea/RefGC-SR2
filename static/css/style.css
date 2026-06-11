@@ -167,8 +167,8 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-logo {
   display: block;
-  /* Match the main title's height: same clamp as .title-name's font-size (line-height: 1) */
-  height: clamp(9.6rem, 20vw, 10rem);
+  /* Hero logo — 1.2× the prior clamp(11.52rem, 24vw, 12rem) */
+  height: clamp(13.82rem, 28.8vw, 14.4rem);
   width: auto;
   margin: 0;
   filter: drop-shadow(0 6px 16.5px rgba(0, 0, 0, 0.55));
@@ -283,6 +283,27 @@ section.has-light-bg { background: var(--bg-secondary); }
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+
+/* Subtitle acronym letters — each painted the EXACT solid color that the same
+   letter has in the title, sampled from the .rgsr 90deg gradient
+   (#F8941F→#CC727A→#A04FD4→#6B7DE1→#2E9BEE) at that glyph's position across
+   "RefGC-SR²". So subtitle "Ref/SR/Refinement/GC" matches the title letter-for-letter. */
+.subtitle-anim .acr-r1   { color: #EB8A3A; }   /* R of Ref(erence) */
+.subtitle-anim .acr-e    { color: #D2766E; }   /* e of Ref */
+.subtitle-anim .acr-f    { color: #C06992; }   /* f of Ref */
+.subtitle-anim .acr-g    { color: #AD59BA; }   /* G of Generated */
+.subtitle-anim .acr-c    { color: #925BD7; }   /* C of Content   */
+.subtitle-anim .acr-s    { color: #6A7EE1; }   /* S of Super     */
+.subtitle-anim .acr-r    { color: #4D8CE7; }   /* R of Resolution */
+.subtitle-anim .acr-ref2 { color: #3697EC; }   /* R of Refinement (the ²) */
+.subtitle-anim .acr-r1,
+.subtitle-anim .acr-e,
+.subtitle-anim .acr-f,
+.subtitle-anim .acr-g,
+.subtitle-anim .acr-c,
+.subtitle-anim .acr-s,
+.subtitle-anim .acr-r,
+.subtitle-anim .acr-ref2 { font-weight: 800; }
 .glitch-sr {
   display: inline-block;
   filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.28));
@@ -451,7 +472,24 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .cofirst-marquee:hover .cofirst-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
-  .cofirst-track { animation: none; }
+  /* Honor reduced-motion: stop every looping/entrance animation (glitch, marquee,
+     pulsing dot, word-in, carousel fade) and snap transitions. The curtain still
+     works — it's drag-driven; its transitions just become instant. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* fully kill the title SR² glitch (no jitter / chromatic flicker) */
+  .glitch-sr,
+  .title-main .tag-sr { animation: none !important; }
+  /* the author marquee stops in place */
+  .cofirst-track { animation: none !important; }
+  /* subtitle words animate in from opacity:0 — keep them visible without motion */
+  .subtitle-anim .word { opacity: 1 !important; transform: none !important; }
 }
 
 /* Action buttons */
