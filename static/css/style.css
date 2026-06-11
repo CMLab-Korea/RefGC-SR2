@@ -377,13 +377,13 @@ section.has-light-bg { background: var(--bg-secondary); }
   white-space: nowrap;
 }
 .affiliations {
-  font-size: 15.11px;
+  font-size: 17.55px;
   color: var(--text-primary);
   margin-bottom: 18px;
   font-style: italic;
 }
 .affiliations .cofirst-note {
-  font-size: 12.68px;
+  font-size: 15px;
   margin-top: 2.25px;
   color: var(--text-primary);
   font-style: normal;
