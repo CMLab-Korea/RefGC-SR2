@@ -157,10 +157,19 @@ section.has-light-bg { background: var(--bg-secondary); }
   gap: clamp(0.6rem, 1.6vw, 1.4rem);
   flex-wrap: wrap;
 }
+/* "RefGC-SR²:" wordmark beside the logo (line 1 of the title) */
+.title-name {
+  font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text-primary);
+}
 .title-logo {
   display: block;
-  width: clamp(240px, 38vw, 480px);
-  height: auto;
+  /* Match the main title's height: same clamp as .title-name's font-size (line-height: 1) */
+  height: clamp(9.6rem, 20vw, 10rem);
+  width: auto;
   margin: 0;
   filter: drop-shadow(0 6px 16.5px rgba(0, 0, 0, 0.55));
 }
@@ -239,8 +248,8 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* Inline "RefGC-SR²" mentions in the body reuse the main-title gradient
    (Ref tan → GC lavender → SR² blue), so the term reads consistently. */
 .rgsr {
-  /* Glossy text matching logo_final: horizontal hue (orange→hot-pink→blue) with a
-     vertical sheen highlight on top + a soft drop-shadow for a 3D glossy feel. */
+  /* Glossy text matching logo_robot_final: orange (Ref) → purple (GC) → blue (SR²),
+     with a vertical sheen highlight on top + a soft drop-shadow for a 3D feel. */
   background:
     linear-gradient(180deg,
       rgba(255, 255, 255, 0.6) 0%,
@@ -248,11 +257,11 @@ section.has-light-bg { background: var(--bg-secondary); }
       rgba(255, 255, 255, 0) 52%,
       rgba(0, 0, 0, 0.14) 100%),
     linear-gradient(90deg,
-      #F7A22E 0%,
-      #F37D6B 20%,
-      #F058A8 44%,
-      #987CC9 72%,
-      #41A0EA 100%);
+      #F8941F 0%,
+      #CC727A 22%,
+      #A04FD4 46%,
+      #6B7DE1 73%,
+      #2E9BEE 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -268,7 +277,7 @@ section.has-light-bg { background: var(--bg-secondary); }
 .glitch-sr,
 .glitch-sr sup {
   /* glossy vertical blue (light top → base → deep bottom) like the logo SR² */
-  background: linear-gradient(180deg, #9FD2F7 0%, #41A0EA 52%, #2C82D2 100%);
+  background: linear-gradient(180deg, #8FCDF8 0%, #2E9BEE 52%, #1F7FCE 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -330,8 +339,7 @@ section.has-light-bg { background: var(--bg-secondary); }
   font-size: clamp(1.4rem, 2.6vw, 2.05rem);
   font-weight: 400;
   color: var(--text-secondary);
-  /* pull up to absorb the logo PNG's transparent bottom padding */
-  margin: clamp(-6.5rem, -8.5vw, -2rem) 0 20.25px 0;
+  margin: 6px 0 20.25px 0;
   letter-spacing: -0.01em;
 }
 .subtitle-anim .word {
