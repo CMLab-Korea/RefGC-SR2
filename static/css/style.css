@@ -167,8 +167,8 @@ section.has-light-bg { background: var(--bg-secondary); }
 }
 .title-logo {
   display: block;
-  /* Hero logo — 1.2× the prior clamp(11.52rem, 24vw, 12rem) */
-  height: clamp(13.82rem, 28.8vw, 14.4rem);
+  /* Hero logo — 0.9× the prior clamp(12.44rem, 25.92vw, 12.96rem) */
+  height: clamp(11.2rem, 23.33vw, 11.66rem);
   width: auto;
   margin: 0;
   filter: drop-shadow(0 6px 16.5px rgba(0, 0, 0, 0.55));
@@ -248,8 +248,8 @@ section.has-light-bg { background: var(--bg-secondary); }
 /* Inline "RefGC-SR²" mentions in the body reuse the main-title gradient
    (Ref tan → GC lavender → SR² blue), so the term reads consistently. */
 .rgsr {
-  /* Glossy text matching logo_robot_final: orange (Ref) → purple (GC) → blue (SR²),
-     with a vertical sheen highlight on top + a soft drop-shadow for a 3D feel. */
+  /* Glossy text matching _logo_final: orange (Ref) → magenta/purple (GC) → blue (SR²),
+     sampled from the new logo's box colors, with a vertical sheen + soft drop-shadow. */
   background:
     linear-gradient(180deg,
       rgba(255, 255, 255, 0.6) 0%,
@@ -257,11 +257,12 @@ section.has-light-bg { background: var(--bg-secondary); }
       rgba(255, 255, 255, 0) 52%,
       rgba(0, 0, 0, 0.14) 100%),
     linear-gradient(90deg,
-      #F8941F 0%,
-      #CC727A 22%,
-      #A04FD4 46%,
-      #6B7DE1 73%,
-      #2E9BEE 100%);
+      #FBA721 0%,
+      #E9683B 13%,
+      #C84BC4 38%,
+      #A23FE0 52%,
+      #6E5CEC 74%,
+      #2897FC 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -276,8 +277,8 @@ section.has-light-bg { background: var(--bg-secondary); }
    leaves the parent gradient clip, so give it its own solid blue (logo SR²). */
 .glitch-sr,
 .glitch-sr sup {
-  /* glossy vertical blue (light top → base → deep bottom) like the logo SR² */
-  background: linear-gradient(180deg, #8FCDF8 0%, #2E9BEE 52%, #1F7FCE 100%);
+  /* glossy vertical blue (light top → base → deep bottom) like the new logo SR² */
+  background: linear-gradient(180deg, #8FCBFB 0%, #2897FC 52%, #1574D8 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -288,14 +289,14 @@ section.has-light-bg { background: var(--bg-secondary); }
    letter has in the title, sampled from the .rgsr 90deg gradient
    (#F8941F→#CC727A→#A04FD4→#6B7DE1→#2E9BEE) at that glyph's position across
    "RefGC-SR²". So subtitle "Ref/SR/Refinement/GC" matches the title letter-for-letter. */
-.subtitle-anim .acr-r1   { color: #EB8A3A; }   /* R of Ref(erence) */
-.subtitle-anim .acr-e    { color: #D2766E; }   /* e of Ref */
-.subtitle-anim .acr-f    { color: #C06992; }   /* f of Ref */
-.subtitle-anim .acr-g    { color: #AD59BA; }   /* G of Generated */
-.subtitle-anim .acr-c    { color: #925BD7; }   /* C of Content   */
-.subtitle-anim .acr-s    { color: #6A7EE1; }   /* S of Super     */
-.subtitle-anim .acr-r    { color: #4D8CE7; }   /* R of Resolution */
-.subtitle-anim .acr-ref2 { color: #3697EC; }   /* R of Refinement (the ²) */
+.subtitle-anim .acr-r1   { color: #F2872E; }   /* R of Ref(erence) */
+.subtitle-anim .acr-e    { color: #E1615C; }   /* e of Ref */
+.subtitle-anim .acr-f    { color: #D5568F; }   /* f of Ref */
+.subtitle-anim .acr-g    { color: #C54AC6; }   /* G of Generated */
+.subtitle-anim .acr-c    { color: #A040E0; }   /* C of Content   */
+.subtitle-anim .acr-s    { color: #6F5BEC; }   /* S of Super     */
+.subtitle-anim .acr-r    { color: #4D78F4; }   /* R of Resolution */
+.subtitle-anim .acr-ref2 { color: #328FFA; }   /* R of Refinement (the ²) */
 .subtitle-anim .acr-r1,
 .subtitle-anim .acr-e,
 .subtitle-anim .acr-f,
