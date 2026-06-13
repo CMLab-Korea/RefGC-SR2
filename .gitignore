@@ -2,3 +2,5 @@
 /commercial_samples/*
 /.claude/*
 /asset/*
+# Unused/legacy assets parked here — never deployed
+/asset/archive/
