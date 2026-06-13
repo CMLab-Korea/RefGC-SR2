@@ -1,5 +1,4 @@
 *.md
-/images
-/commercial_samples
-/.claude
-/asset
+/commercial_samples/*
+/.claude/*
+/asset/*
