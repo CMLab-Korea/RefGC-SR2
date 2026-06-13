@@ -104,6 +104,8 @@ body {
 
 section.section { padding: 60px 0; }
 section.has-light-bg { background: var(--bg-secondary); }
+/* Tight vertical rhythm for the Showcase → Abstract → Figure 1 group */
+section.section.section-tight { padding-top: 26px; padding-bottom: 26px; }
 
 /* ============================================
    HERO

@@ -28,7 +28,7 @@
 <!-- Image comparison slider (LRGI ⇄ Our result) -->
 <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
-<link rel="stylesheet" href="static/css/style.css?v=103" />
+<link rel="stylesheet" href="static/css/style.css?v=104" />
 </head>
 
 <body>
@@ -112,7 +112,7 @@
   </div>
 </section>
 
-<!-- ====================== FIGURE 1 (TEASER) ====================== -->
+<!-- ====================== TL;DR ====================== -->
 <section class="section section-teaser">
   <div class="container">
 
@@ -124,58 +124,11 @@
         with the first real-world triplet dataset and a frequency-aware diffusion transformer model.
       </p>
     </div>
-
-    <!-- Figure 1 -->
-    <div class="teaser-container">
-      <img src="static/images/teaser.png?v=2" alt="RefGC-SR² teaser" class="teaser-image" />
-      <p class="figure-caption">
-        <strong>Figure 1.</strong> Reference-guided Generated Content Super-Resolution-Refinement (<span class="rgsr">RefGC-SR<sup>2</sup></span>).
-        Existing reference-guided generation pipelines first produce a low-resolution generated image (LRGI) from a
-        high-resolution reference image (HRRI), but the output often suffers from four common generative artifacts:
-        <span class="artifact-tag a1">(a) identity distortion</span>,
-        <span class="artifact-tag a2">(b) detail inconsistency</span>,
-        <span class="artifact-tag a3">(c) texture loss</span>, and
-        <span class="artifact-tag a4">(d) overall quality degradation</span>.
-        We introduce <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>, a post-processing task that takes the LRGI and the HRRI as inputs,
-        and produces a high-resolution, artifact-refined output.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ====================== ABSTRACT ====================== -->
-<section class="section section-abstract has-light-bg">
-  <div class="container">
-    <h2 class="section-title">Abstract</h2>
-    <div class="abstract-text">
-      <p>
-        Reference-guided generation (e.g., object compositing, customization) has progressed rapidly,
-        yet current pipelines share a fundamental limitation: the object-centric high-resolution
-        reference image (HRRI) provided by users is downsampled to a fixed low-resolution (LR)
-        before being fed into the model, so the fine-grained details are discarded before the output
-        is even produced. In addition, the generation step then introduces its own artifacts
-        (e.g., identity distortion) on top of this loss. Existing reference-guided generated content refinement (RefGCR) methods can correct some
-        of these artifacts but still operate in the LR domain; reference-guided super-resolution
-        (RefSR) methods recover resolution but assume natural-image degradations and ignore the
-        artifact distribution of generative pipelines. To address both gaps in a single formulation,
-        we introduce a new task: <strong>reference-guided generated content
-        super-resolution-refinement (<span class="rgsr">RefGC-SR<sup>2</sup></span>)</strong>, where the original HRRI is reused at the
-        post-processing stage to recover lost details, refine generative artifacts, and upscale
-        the output simultaneously. We construct the first real-world triplet data generation pipeline for this <span class="rgsr">RefGC-SR<sup>2</sup></span>
-        task, training a diptych-conditioned generator to synthesize paired low-quality anchors
-        that public pretrained models cannot provide. We further present a frequency-aware
-        diffusion transformer model for <span class="rgsr">RefGC-SR<sup>2</sup></span> that selectively injects fine details from the
-        HRRI while removing generative artifacts. Extensive experiments demonstrate that our
-        <span class="rgsr">RefGC-SR<sup>2</sup></span> model successfully (i) refines the object identity faithfully with respect to the
-        reference, and (ii) recovers high-resolution details, so that the final result is significantly
-        higher quality and practically more usable compared to existing RefGCR and RefSR baselines.
-      </p>
-    </div>
   </div>
 </section>
 
 <!-- ====================== SHOWCASE ====================== -->
-<section class="section section-showcase">
+<section class="section section-showcase section-tight">
   <div class="container">
 
     <div class="showcase" id="showcase">
@@ -585,6 +538,59 @@
       </div>
     </div>
     <!-- /showcase -->
+  </div>
+</section>
+
+<!-- ====================== ABSTRACT ====================== -->
+<section class="section section-abstract has-light-bg section-tight">
+  <div class="container">
+    <h2 class="section-title">Abstract</h2>
+    <div class="abstract-text">
+      <p>
+        Reference-guided generation (e.g., object compositing, customization) has progressed rapidly,
+        yet current pipelines share a fundamental limitation: the object-centric high-resolution
+        reference image (HRRI) provided by users is downsampled to a fixed low-resolution (LR)
+        before being fed into the model, so the fine-grained details are discarded before the output
+        is even produced. In addition, the generation step then introduces its own artifacts
+        (e.g., identity distortion) on top of this loss. Existing reference-guided generated content refinement (RefGCR) methods can correct some
+        of these artifacts but still operate in the LR domain; reference-guided super-resolution
+        (RefSR) methods recover resolution but assume natural-image degradations and ignore the
+        artifact distribution of generative pipelines. To address both gaps in a single formulation,
+        we introduce a new task: <strong>reference-guided generated content
+        super-resolution-refinement (<span class="rgsr">RefGC-SR<sup>2</sup></span>)</strong>, where the original HRRI is reused at the
+        post-processing stage to recover lost details, refine generative artifacts, and upscale
+        the output simultaneously. We construct the first real-world triplet data generation pipeline for this <span class="rgsr">RefGC-SR<sup>2</sup></span>
+        task, training a diptych-conditioned generator to synthesize paired low-quality anchors
+        that public pretrained models cannot provide. We further present a frequency-aware
+        diffusion transformer model for <span class="rgsr">RefGC-SR<sup>2</sup></span> that selectively injects fine details from the
+        HRRI while removing generative artifacts. Extensive experiments demonstrate that our
+        <span class="rgsr">RefGC-SR<sup>2</sup></span> model successfully (i) refines the object identity faithfully with respect to the
+        reference, and (ii) recovers high-resolution details, so that the final result is significantly
+        higher quality and practically more usable compared to existing RefGCR and RefSR baselines.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FIGURE 1 (TEASER) ====================== -->
+<section class="section section-teaser section-tight">
+  <div class="container">
+
+    <!-- Figure 1 -->
+    <div class="teaser-container">
+      <img src="static/images/teaser.png?v=2" alt="RefGC-SR² teaser" class="teaser-image" />
+      <p class="figure-caption">
+        <strong>Figure 1.</strong> Reference-guided Generated Content Super-Resolution-Refinement (<span class="rgsr">RefGC-SR<sup>2</sup></span>).
+        Existing reference-guided generation pipelines first produce a low-resolution generated image (LRGI) from a
+        high-resolution reference image (HRRI), but the output often suffers from four common generative artifacts:
+        <span class="artifact-tag a1">(a) identity distortion</span>,
+        <span class="artifact-tag a2">(b) detail inconsistency</span>,
+        <span class="artifact-tag a3">(c) texture loss</span>, and
+        <span class="artifact-tag a4">(d) overall quality degradation</span>.
+        We introduce <strong><span class="rgsr">RefGC-SR<sup>2</sup></span></strong>, a post-processing task that takes the LRGI and the HRRI as inputs,
+        and produces a high-resolution, artifact-refined output.
+      </p>
+    </div>
   </div>
 </section>
 
